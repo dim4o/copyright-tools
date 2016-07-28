@@ -1,7 +1,8 @@
-package com.copyrightinserter.main;
+package com.copyrightinserter.inserter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import com.copyrightinserter.io.reader.Reader;
 import com.copyrightinserter.io.writer.Writer;
@@ -15,10 +16,13 @@ public class Inserter {
 	private Reader reader;
 
 	private Writer writer;
+	
+	private List<String> extensions;
 
-	public Inserter(Reader reader, Writer writer) throws IOException {
+	public Inserter(Reader reader, Writer writer, List<String> extension) throws IOException {
 		this.reader = reader;
 		this.writer = writer;
+		this.extensions = extension;
 	}
 
 	public void insertBefore(File file, String notice) throws IOException {
@@ -71,18 +75,31 @@ public class Inserter {
 		}
 	}
 	
-	public void insert(File rootDir, String notice) throws IOException {
+	public void insert(File rootDir, String notice, NoticePosition position) throws IOException {
 		File[] files = rootDir.listFiles();
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				System.out.println(file.getName());
-				boolean isExt = file.getName().endsWith(".java");
-				if (isExt) {
+				boolean isExt = containsExtension(file, this.extensions);
+				if (isExt && position.equals(NoticePosition.Top)) {
 					insertBefore(file, notice);
+				} else if(isExt){
+					insertAfter(file, notice);
 				}
 			} else {
-				insert(file, notice);
+				insert(file, notice, position);
 			}
 		}
+	}
+	
+	boolean containsExtension(File file, List<String> fileExtensions){
+		
+		for (String extension : fileExtensions) {
+			if(file.getName().endsWith(extension)){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
