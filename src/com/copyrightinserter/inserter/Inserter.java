@@ -17,12 +17,12 @@ public class Inserter {
 
 	private Writer writer;
 	
-	private List<String> extensions;
+	private String[] extensions;
 
-	public Inserter(Reader reader, Writer writer, List<String> extension) throws IOException {
+	public Inserter(Reader reader, Writer writer, String[] extensions) throws IOException {
 		this.reader = reader;
 		this.writer = writer;
-		this.extensions = extension;
+		this.extensions = extensions;
 	}
 
 	public void insertBefore(File file, String notice) throws IOException {
@@ -92,7 +92,7 @@ public class Inserter {
 		}
 	}
 	
-	boolean containsExtension(File file, List<String> fileExtensions){
+	boolean containsExtension(File file, String[] fileExtensions){
 		
 		for (String extension : fileExtensions) {
 			if(file.getName().endsWith(extension)){
