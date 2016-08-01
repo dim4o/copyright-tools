@@ -4,3 +4,8 @@ libs/
 # Eclipse Core
 .classpath
 .project
+/build/
+
+# Gradle
+.gradle
+.settings

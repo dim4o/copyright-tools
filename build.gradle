@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '0.0.1'
+
+mainClassName = 'com.copyrightinserter.main.CopyrightInserterMain'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Copyright Inserter',
+                   'Implementation-Version': version,
+				   'Main-Class': mainClassName
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-cli:commons-cli:1.3'
+}
+
+run {
+    standardInput = System.in
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
