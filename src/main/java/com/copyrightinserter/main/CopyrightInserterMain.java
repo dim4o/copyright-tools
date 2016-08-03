@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -30,6 +28,15 @@ public class CopyrightInserterMain {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
+		/*Options options = new Options();
+		options.addOption("h", false, "Display help");
+		CommandLineParser parser = new DefaultParser(); 
+		CommandLine cmd = parser.parse(options, args);
+		if(cmd.hasOption("h")){
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp("Copyright license inserter", "header", options, "footer", true);
+		}
+		System.out.println("Runned!!!");*/
 		Options options = new Options();
 		options.addOption("h", false, "Display help");
 		options.addOption(Option.builder("e")
