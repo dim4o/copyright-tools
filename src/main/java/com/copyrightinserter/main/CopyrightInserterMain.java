@@ -81,7 +81,7 @@ public class CopyrightInserterMain {
 			noticeMessage.append(line);
 			noticeMessage.append(LINE_SEPARATOR);
 		}
-
+		
 		return noticeMessage.toString().trim();
 	}
 }

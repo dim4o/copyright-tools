@@ -26,8 +26,8 @@ repositories {
 }
 
 dependencies {
-	//compile fileTree(dir: 'build/libs', include: '*.jar')
     compile 'commons-cli:commons-cli:1.3.1'
+	//compile 'log4j:log4j:1.2.17'
 }
 
 libsDirName = 'lib'
