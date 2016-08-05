@@ -1,4 +1,4 @@
-package com.copyright.inserter.util;
+package com.copyrightinserter.util;
 
 import java.io.File;
 

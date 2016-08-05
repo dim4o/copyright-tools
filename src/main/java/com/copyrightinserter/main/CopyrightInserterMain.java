@@ -1,20 +1,15 @@
 package com.copyrightinserter.main;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.copyright.inserter.util.FileManipulator;
-import com.copyright.inserter.util.SourceManipulator;
+import com.copyrightinserter.util.FileManipulator;
+import com.copyrightinserter.util.SourceManipulator;
+import com.copyrightinserter.cli.AbstractCli;
+import com.copyrightinserter.cli.Cli;
 import com.copyrightinserter.inserter.Inserter;
 import com.copyrightinserter.inserter.NoticePosition;
 
@@ -25,34 +20,13 @@ public class CopyrightInserterMain {
 	private static String EMPTY_STRING = "";
 
 	public static void main(String[] args) throws IOException, ParseException {
-
-		/*Options options = new Options();
-		options.addOption("h", false, "Display help");
-		CommandLineParser parser = new DefaultParser(); 
-		CommandLine cmd = parser.parse(options, args);
-		if(cmd.hasOption("h")){
-			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp("Copyright license inserter", "header", options, "footer", true);
-		}
-		System.out.println("Runned!!!");*/
-		Options options = new Options();
-		options.addOption("h", false, "Display help");
-		options.addOption(Option.builder("e")
-					.longOpt("extensions")
-					.optionalArg(false)
-					.desc("This is file an extensions selector")
-					.hasArgs()
-					.build());	
-		options.addOption("i", true, "Path to input folder");
-		options.addOption("n", true, "Path to notice license text file");
+		AbstractCli cli = new Cli(args);
+		CommandLine cmd = (CommandLine)cli.parse();
 		
-		CommandLineParser parser = new DefaultParser(); 
-		CommandLine cmd = parser.parse(options, args);
-		
-		if(cmd.hasOption("h")){
+		/*if(cmd.hasOption("h")){
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp("Copyright license inserter", "header", options, "footer", true);
-		}
+			formatter.printHelp("Copyright license inserter", "header", cli.getOptions(), "footer", true);
+		}*/
 
 		String rootFolder = cmd.getOptionValue("i");
 		String noticePath = cmd.getOptionValue("n");
@@ -65,7 +39,7 @@ public class CopyrightInserterMain {
 		String notice = manipulator.readFromFile(noticeFile);
 		
 		Inserter inserter = new Inserter(manipulator, extensions);
-		inserter.insert(root, notice, NoticePosition.Bottom);
+		inserter.insert(root, notice, NoticePosition.Top);
 	}
 	
 }

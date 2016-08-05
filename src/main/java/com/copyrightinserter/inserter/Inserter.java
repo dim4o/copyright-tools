@@ -2,9 +2,10 @@ package com.copyrightinserter.inserter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.copyright.inserter.util.FileManipulator;
+import com.copyrightinserter.util.FileManipulator;
 
 public class Inserter {
 
@@ -39,16 +40,24 @@ public class Inserter {
 		this.manipulator.writeToFile(file, LINE_SEPARATOR + notice);
 	}
 	
-	public void insert(File rootDir, String notice, NoticePosition position) throws IOException {
+	public void insert(File rootDir, String notice, NoticePosition position) {
 		File[] files = rootDir.listFiles();
 		for (File file : files) {
 			if (!file.isDirectory()) {
-				System.out.println(file.getName());
 				boolean isExt = containsExtension(file, this.extensions);
-				if (isExt && position.equals(NoticePosition.Top)) {
-					insertBefore(file, notice);
-				} else if(isExt){
-					insertAfter(file, notice);
+				try {
+					if(isExt){
+						if (position.equals(NoticePosition.Top)) {
+							insertBefore(file, notice);
+						} else {
+							insertAfter(file, notice);
+						}
+						
+						LOGGER.log(Level.INFO, String.format("%s - DONE", file.getName()));
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					LOGGER.log(Level.SEVERE, String.format("%s - FAILS", file.getName()), e);
 				}
 			} else {
 				insert(file, notice, position);
