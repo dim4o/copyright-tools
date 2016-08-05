@@ -32,8 +32,4 @@ public class NoticeReader implements Reader {
 	public Reader instantiate(File file) throws IOException {
 		return new NoticeReader(file);
 	}
-	
-	public static int aaa(){
-		return 1;
-	}
 }
