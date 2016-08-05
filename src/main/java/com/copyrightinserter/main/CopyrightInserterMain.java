@@ -13,12 +13,10 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.copyright.inserter.util.FileManipulator;
+import com.copyright.inserter.util.SourceManipulator;
 import com.copyrightinserter.inserter.Inserter;
 import com.copyrightinserter.inserter.NoticePosition;
-import com.copyrightinserter.io.reader.NoticeReader;
-import com.copyrightinserter.io.reader.Reader;
-import com.copyrightinserter.io.writer.NoticeWriter;
-import com.copyrightinserter.io.writer.Writer;
 
 public class CopyrightInserterMain {
 
@@ -47,7 +45,7 @@ public class CopyrightInserterMain {
 					.build());	
 		options.addOption("i", true, "Path to input folder");
 		options.addOption("n", true, "Path to notice license text file");
-
+		
 		CommandLineParser parser = new DefaultParser(); 
 		CommandLine cmd = parser.parse(options, args);
 		
@@ -62,26 +60,12 @@ public class CopyrightInserterMain {
 		
 		File root = new File(rootFolder);
 		File noticeFile = new File(noticePath);
-		String notice = getNoticeFromFile(noticeFile);
+
+		FileManipulator manipulator = new SourceManipulator();
+		String notice = manipulator.readFromFile(noticeFile);
 		
-		Reader reader = new NoticeReader();
-		Writer writer = new NoticeWriter();
-		
-		Inserter inserter = new Inserter(reader, writer, extensions);
-		inserter.insert(root, notice, NoticePosition.Top);
+		Inserter inserter = new Inserter(manipulator, extensions);
+		inserter.insert(root, notice, NoticePosition.Bottom);
 	}
-
-	public static String getNoticeFromFile(File file) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-
-		StringBuilder noticeMessage = new StringBuilder();
-		String line = EMPTY_STRING;
-
-		while ((line = reader.readLine()) != null) {
-			noticeMessage.append(line);
-			noticeMessage.append(LINE_SEPARATOR);
-		}
-		
-		return noticeMessage.toString().trim();
-	}
+	
 }
