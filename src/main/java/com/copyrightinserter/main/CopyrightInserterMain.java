@@ -1,61 +1,69 @@
 package com.copyrightinserter.main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.ParseException;
-
-import com.copyrightinserter.util.SourceManipulator;
-import com.copyrightinserter.cli.AbstractCli;
-import com.copyrightinserter.cli.Cli;
+import com.copyrightinserter.cli.AbstractConsole;
+import com.copyrightinserter.cli.ApacheCliConsole;
+import com.copyrightinserter.exceptions.ArgumentParseException;
 import com.copyrightinserter.inserter.Inserter;
 import com.copyrightinserter.inserter.NoticePosition;
 import com.copyrightinserter.util.FileManipulator;
+import com.copyrightinserter.util.SourceManipulator;
 
 public class CopyrightInserterMain {
 
 	private static final Logger LOGGER = Logger.getLogger(Inserter.class.getName());
 
-	private static String LINE_SEPARATOR = System.getProperty("line.separator");
+	public static void main(String[] args) {
 
-	private static String EMPTY_STRING = "";
+		try {
+			AbstractConsole cli = new ApacheCliConsole(args);
+			cli.parse();
 
-	public static void main(String[] args) throws IOException, ParseException {
-		AbstractCli cli = new Cli(args);
-		CommandLine cmd = (CommandLine) cli.parse();
+			if (cli.hasOption("h")) {
+				cli.showUsage();
+			}
+			/*Level level = cli.hasOption("info") ? Level.OFF : Level.ALL;
+			LOGGER.setLevel(level);*/
+			
+			String rootFolder = cli.getOptionValue("i");
+			String noticePath = cli.getOptionValue("n");
+			String[] extensions = cli.getOptionValues("e");
+			NoticePosition noticePotition = cli.hasOption("b") ? NoticePosition.Bottom : NoticePosition.Top;
 
-		/*
-		 * if(cmd.hasOption("h")){ HelpFormatter formatter = new
-		 * HelpFormatter(); formatter.printHelp("Copyright license inserter",
-		 * "header", cli.getOptions(), "footer", true); }
-		 */
+			File root = new File(rootFolder);
+			File noticeFile = new File(noticePath);
 
-		String rootFolder = cmd.getOptionValue("i");
-		String noticePath = cmd.getOptionValue("n");
-		String[] extensions = cmd.getOptionValues("e");
+			FileManipulator manipulator = new SourceManipulator();
+			String notice = manipulator.readFromFile(noticeFile);
+			Inserter inserter = new Inserter(manipulator, extensions);
+			inserter.insert(root, notice, noticePotition);
 
-		File root = new File(rootFolder);
-		File noticeFile = new File(noticePath);
+			int all = inserter.getSucceedInserts() + inserter.getFailedIserts();
+			float jobFinishPercent = 0;
 
-		FileManipulator manipulator = new SourceManipulator();
-		String notice = manipulator.readFromFile(noticeFile);
+			if (all > 0) {
+				jobFinishPercent = (inserter.getSucceedInserts() / all) * 100;
+			}
 
-		Inserter inserter = new Inserter(manipulator, extensions);
-		inserter.insert(root, notice, NoticePosition.Top);
+			System.out.println();
+			LOGGER.info(String.format("Job finished at %s percents.", jobFinishPercent));
+			LOGGER.info(String.format("%s succeed, %s failed inserts", inserter.getSucceedInserts(),
+					inserter.getFailedIserts()));
 
-		int all = inserter.getSucceedInserts() + inserter.getFailedIserts();
-		float jobFinishPercent = 0;
-
-		if (all > 0) {
-			jobFinishPercent = (inserter.getSucceedInserts() / all) * 100;
+		} catch (ArgumentParseException e) {
+			LOGGER.log(Level.SEVERE, "Error while parsing arguments: " + e.getMessage());
+		} catch (FileNotFoundException e) {
+			LOGGER.log(Level.SEVERE, e.getMessage());
+		} catch (IOException e) {
+			LOGGER.log(Level.SEVERE, e.getMessage());
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Unknown exception: " + e.getClass().getName());
 		}
-
-		System.out.println();
-		LOGGER.info(String.format("Job finished at %s percents.", jobFinishPercent));
-		LOGGER.info(String.format("%s succeed, %s failed inserts", inserter.getSucceedInserts(),
-				inserter.getFailedIserts()));
 	}
-
+	
 }

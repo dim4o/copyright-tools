@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.copyrightinserter.constants.Constants;
 import com.copyrightinserter.util.FileManipulator;
 
 public class Inserter {
-
 	private static final Logger LOGGER = Logger.getLogger(Inserter.class.getName());
-
-	private static String LINE_SEPARATOR = System.getProperty("line.separator");
 
 	private String[] extensions;
 	
@@ -28,7 +26,7 @@ public class Inserter {
 
 	public void insertBefore(File file, String notice) throws IOException {
 		String source = this.manipulator.readFromFile(file);
-		String begin = notice + LINE_SEPARATOR;
+		String begin = notice + Constants.LINE_SEPARATOR;
 		String newSource = begin + source;
 		
 		file.delete();
@@ -41,7 +39,7 @@ public class Inserter {
 	}
 
 	void insertAfter(File file, String notice) throws IOException {
-		this.manipulator.writeToFile(file, LINE_SEPARATOR + notice);
+		this.manipulator.writeToFile(file, Constants.LINE_SEPARATOR + notice);
 	}
 	
 	public void insert(File rootDir, String notice, NoticePosition position) {
