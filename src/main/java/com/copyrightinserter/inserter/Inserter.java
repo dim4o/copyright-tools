@@ -16,6 +16,10 @@ public class Inserter {
 	private String[] extensions;
 	
 	private FileManipulator manipulator;
+	
+	private int succeedInserts = 0;
+
+	private int failedIserts = 0;
 
 	public Inserter(FileManipulator manipulator, String[] extensions) throws IOException {
 		this.extensions = extensions;
@@ -42,6 +46,7 @@ public class Inserter {
 	
 	public void insert(File rootDir, String notice, NoticePosition position) {
 		File[] files = rootDir.listFiles();
+		
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				boolean isExt = containsExtension(file, this.extensions);
@@ -54,10 +59,11 @@ public class Inserter {
 						}
 						
 						LOGGER.log(Level.INFO, String.format("%s - DONE", file.getName()));
+						this.succeedInserts++;
 					}
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					LOGGER.log(Level.SEVERE, String.format("%s - FAILS", file.getName()), e);
+					this.failedIserts++;
 				}
 			} else {
 				insert(file, notice, position);
@@ -73,5 +79,13 @@ public class Inserter {
 		}
 		
 		return false;
+	}
+	
+	public int getSucceedInserts() {
+		return succeedInserts;
+	}
+	
+	public int getFailedIserts() {
+		return failedIserts;
 	}
 }
