@@ -8,6 +8,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.copyrightinserter.constants.OptionConstants;
+import com.copyrightinserter.constants.UsageConstants;
 import com.copyrightinserter.exceptions.ArgumentParseException;
 
 public class ApacheCliConsole extends AbstractConsole {
@@ -25,48 +27,48 @@ public class ApacheCliConsole extends AbstractConsole {
 		Options options = new Options();
 		
 		// help option
-		options.addOption(Option.builder("h")
-				.longOpt("help")
+		options.addOption(Option.builder(OptionConstants.HELP_SHORT)
+				.longOpt(OptionConstants.HELP_LONG)
 				.optionalArg(true)
-				.desc("Display help")
+				.desc(UsageConstants.HELP_OPTION)
 				.build());
 		
 		// file extensions list
-		options.addOption(Option.builder("e")
-				.longOpt("extensions")
+		options.addOption(Option.builder(OptionConstants.EXTENSION_SHORT)
+				.longOpt(OptionConstants.EXTENSION_LONG)
 				.optionalArg(false)
-				.desc("File extensions selector. Expects list of space separated extensions")
+				.desc(UsageConstants.EXTENSIONS_OPTION_DESC)
 				.hasArgs()
 				.build());
 		
 		// input folder location
-		options.addOption(Option.builder("i")
-				.longOpt("input")
+		options.addOption(Option.builder(OptionConstants.INSERT_SHORT)
+				.longOpt(OptionConstants.INSERT_LONG)
 				.optionalArg(false)
-				.desc("Path to input folder")
+				.desc(UsageConstants.INPUT_OPTION_DESC)
 				.hasArg()
 				.build());
 		
 		// notice file location
-		options.addOption(Option.builder("n")
-				.longOpt("notice")
+		options.addOption(Option.builder(OptionConstants.NOTICE_SHORT)
+				.longOpt(OptionConstants.NOTICE_LONG)
 				.optionalArg(false)
-				.desc("Path to notice license text file")
+				.desc(UsageConstants.NOTICE_OPTION_DESC)
 				.hasArg()
 				.build());
 		
 		// Insert on top of the source
-		options.addOption(Option.builder("t")
-				.longOpt("top")
+		options.addOption(Option.builder(OptionConstants.TOP_SHORT)
+				.longOpt(OptionConstants.TOP_LONG)
 				.optionalArg(false)
-				.desc("Insert on top")
+				.desc(UsageConstants.TOP_OPTION_DESC)
 				.hasArg(false).build());
 		
 		// Insert on bottom of the source
-		options.addOption(Option.builder("b")
-				.longOpt("bottom")
+		options.addOption(Option.builder(OptionConstants.BOOTOM_SHORT)
+				.longOpt(OptionConstants.BOTTOM_LONG)
 				.optionalArg(false)
-				.desc("Insert on bottom")
+				.desc(UsageConstants.BOTTOM_OPTION_DESCR)
 				.build());
 
 		// Print info option
@@ -93,7 +95,12 @@ public class ApacheCliConsole extends AbstractConsole {
 	
 	public void showUsage() {
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("Copyright license inserter", "header", this.options, "footer", true);
+		formatter.printHelp(
+				UsageConstants.USAGE, 
+				UsageConstants.HEADER, 
+				this.options, 
+				UsageConstants.FOOTER, 
+				false);
 	}
 
 	@Override

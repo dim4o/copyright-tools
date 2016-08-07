@@ -9,19 +9,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.copyrightinserter.constants.Constants;
+import com.copyrightinserter.constants.InserterConstants;
 
 public class SourceManipulator implements FileManipulator{
 	@Override
 	public String readFromFile(File file) throws FileNotFoundException, IOException{
 		StringBuilder sourceBuilder = new StringBuilder();
-		String line = Constants.EMPTY_STRING;
+		String line = InserterConstants.EMPTY_STRING;
 		String source = null;
 		
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))){
 			while((line = reader.readLine()) != null){
 				sourceBuilder.append(line);
-				sourceBuilder.append(Constants.LINE_SEPARATOR);
+				sourceBuilder.append(InserterConstants.LINE_SEPARATOR);
 			}
 			
 			source = sourceBuilder.toString().trim();

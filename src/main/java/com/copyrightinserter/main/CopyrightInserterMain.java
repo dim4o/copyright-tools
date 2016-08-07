@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import com.copyrightinserter.cli.AbstractConsole;
 import com.copyrightinserter.cli.ApacheCliConsole;
+import com.copyrightinserter.constants.OptionConstants;
 import com.copyrightinserter.exceptions.ArgumentParseException;
 import com.copyrightinserter.inserter.Inserter;
 import com.copyrightinserter.inserter.NoticePosition;
@@ -27,13 +28,16 @@ public class CopyrightInserterMain {
 			if (cli.hasOption("h")) {
 				cli.showUsage();
 			}
-			/*Level level = cli.hasOption("info") ? Level.OFF : Level.ALL;
-			LOGGER.setLevel(level);*/
-			
-			String rootFolder = cli.getOptionValue("i");
-			String noticePath = cli.getOptionValue("n");
-			String[] extensions = cli.getOptionValues("e");
-			NoticePosition noticePotition = cli.hasOption("b") ? NoticePosition.Bottom : NoticePosition.Top;
+			/*
+			 * Level level = cli.hasOption("info") ? Level.OFF : Level.ALL;
+			 * LOGGER.setLevel(level);
+			 */
+
+			String rootFolder = cli.getOptionValue(OptionConstants.INSERT_SHORT);
+			String noticePath = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
+			String[] extensions = cli.getOptionValues(OptionConstants.EXTENSION_SHORT);
+			NoticePosition noticePotition = 
+					cli.hasOption(OptionConstants.BOOTOM_SHORT) ? NoticePosition.Bottom : NoticePosition.Top;
 
 			File root = new File(rootFolder);
 			File noticeFile = new File(noticePath);
@@ -65,5 +69,5 @@ public class CopyrightInserterMain {
 			LOGGER.log(Level.SEVERE, "Unknown exception: " + e.getClass().getName());
 		}
 	}
-	
+
 }
