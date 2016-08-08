@@ -5,5 +5,5 @@ public class InserterConstants {
 
     public static final String EMPTY_STRING = "";
 
-    public static final String DOT = ".";
+    public static final String LOG_FILENAME = "CopyrightInserter.log";
 }
