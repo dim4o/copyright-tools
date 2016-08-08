@@ -1,37 +1,36 @@
 package com.copyrightinserter.constants;
 
 public class OptionConstants {
-	// Bottom option
-	public static final String BOOTOM_SHORT = "b";
+    // Bottom option
+    public static final String BOOTOM_SHORT = "b";
 
-	public static final String BOTTOM_LONG = "bottom";
+    public static final String BOTTOM_LONG = "bottom";
 
-	// Extension option
-	public static final String EXTENSION_SHORT = "e";
+    // Extension option
+    public static final String EXTENSION_SHORT = "e";
 
-	public static final String EXTENSION_LONG = "extension";
+    public static final String EXTENSION_LONG = "extension";
 
-	// Help option
-	public static final String HELP_SHORT = "h";
+    // Help option
+    public static final String HELP_SHORT = "h";
 
-	public static final String HELP_LONG = "help";
+    public static final String HELP_LONG = "help";
 
-	// Insert option
-	public static final String INSERT_SHORT = "i";
+    // Insert option
+    public static final String INSERT_SHORT = "i";
 
-	public static final String INSERT_LONG = "insert";
-	
-	// Info option
-	public static final String INFO_LONG = "info";
+    public static final String INSERT_LONG = "insert";
 
-	// Notice option
-	public static final String NOTICE_SHORT = "n";
+    // Info option
+    public static final String INFO_LONG = "info";
 
-	public static final String NOTICE_LONG = "notice";
+    // Notice option
+    public static final String NOTICE_SHORT = "n";
 
-	// Top option
-	public static final String TOP_SHORT = "t";
+    public static final String NOTICE_LONG = "notice";
 
-	public static final String TOP_LONG = "top";
+    // Top option
+    public static final String TOP_SHORT = "t";
 
+    public static final String TOP_LONG = "top";
 }
