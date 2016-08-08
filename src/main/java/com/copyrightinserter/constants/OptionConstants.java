@@ -20,6 +20,9 @@ public class OptionConstants {
 	public static final String INSERT_SHORT = "i";
 
 	public static final String INSERT_LONG = "insert";
+	
+	// Info option
+	public static final String INFO_LONG = "info";
 
 	// Notice option
 	public static final String NOTICE_SHORT = "n";

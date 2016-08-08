@@ -30,7 +30,7 @@ public class ApacheCliConsole extends AbstractConsole {
 		options.addOption(Option.builder(OptionConstants.HELP_SHORT)
 				.longOpt(OptionConstants.HELP_LONG)
 				.optionalArg(true)
-				.desc(UsageConstants.HELP_OPTION)
+				.desc(UsageConstants.HELP_OPTION_DESC)
 				.build());
 		
 		// file extensions list
@@ -71,11 +71,12 @@ public class ApacheCliConsole extends AbstractConsole {
 				.desc(UsageConstants.BOTTOM_OPTION_DESCR)
 				.build());
 
-		// Print info option
-		/*options.addOption(Option.builder("info")
+		// Enable job info logging option
+		options.addOption(Option.builder()
+				.longOpt(OptionConstants.INFO_LONG)
 				.optionalArg(true)
-				.desc("")
-				.build());*/
+				.desc("Enables job info console logging")
+				.build());
 		
 		return options;
 	}

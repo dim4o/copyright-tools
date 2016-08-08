@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.copyrightinserter.constants.InserterConstants;
+import com.copyrightinserter.exceptions.AlreadyInsertedException;
 import com.copyrightinserter.util.FileManipulator;
 
 public class Inserter {
@@ -18,14 +19,17 @@ public class Inserter {
 	private int succeedInserts = 0;
 
 	private int failedIserts = 0;
-
+	
 	public Inserter(FileManipulator manipulator, String[] extensions) throws IOException {
 		this.extensions = extensions;
 		this.manipulator = manipulator;
 	}
 
-	public void insertBefore(File file, String notice) throws IOException {
+	public void insertBefore(File file, String notice) throws IOException, AlreadyInsertedException {
 		String source = this.manipulator.readFromFile(file);
+		if(source.startsWith(notice)){
+			throw new AlreadyInsertedException("The notice you have tried to insert is already inserted.");
+		}
 		String begin = notice + InserterConstants.LINE_SEPARATOR;
 		String newSource = begin + source;
 		
@@ -60,8 +64,11 @@ public class Inserter {
 						this.succeedInserts++;
 					}
 				} catch (IOException e) {
-					LOGGER.log(Level.SEVERE, String.format("%s - FAILS", file.getName()), e);
 					this.failedIserts++;
+					LOGGER.log(Level.SEVERE, String.format("%s - FAILS", file.getName()));
+				} catch (AlreadyInsertedException e) {
+					this.failedIserts++;
+					LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s", file.getName(), e.getMessage()));
 				}
 			} else {
 				insert(file, notice, position);
