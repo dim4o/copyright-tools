@@ -2,7 +2,7 @@ package com.copyrightinserter.main;
 
 import com.copyrightinserter.cli.AbstractConsole;
 import com.copyrightinserter.cli.ApacheCliConsole;
-import com.copyrightinserter.inserter.InsertEngine;
+import com.copyrightinserter.core.InsertEngine;
 import com.copyrightinserter.util.FileManipulator;
 import com.copyrightinserter.util.SourceManipulator;
 import com.copyrightinserter.writer.ConsoleWriter;

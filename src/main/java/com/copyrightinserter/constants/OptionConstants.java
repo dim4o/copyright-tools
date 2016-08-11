@@ -1,6 +1,11 @@
 package com.copyrightinserter.constants;
 
 public class OptionConstants {
+    // Blank option
+    public static final String BLANK_SHORT = "bl";
+
+    public static final String BLANK_LONG = "blank";
+
     // Bottom option
     public static final String BOOTOM_SHORT = "b";
 

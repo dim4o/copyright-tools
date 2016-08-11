@@ -3,14 +3,10 @@ package com.copyrightinserter.cli;
 import com.copyrightinserter.exceptions.ArgumentParseException;
 
 public abstract class AbstractConsole {
-    private String[] arguments;
+    protected String[] arguments;
 
     protected AbstractConsole(String[] arguments) {
         this.arguments = arguments;
-    }
-
-    public String[] getArguments() {
-        return this.arguments;
     }
 
     public abstract void parse() throws ArgumentParseException;

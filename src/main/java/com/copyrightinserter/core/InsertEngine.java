@@ -1,4 +1,4 @@
-package com.copyrightinserter.inserter;
+package com.copyrightinserter.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +39,7 @@ public class InsertEngine implements Runnable {
 
             if (cli.hasOption(OptionConstants.HELP_SHORT)) {
                 cli.showUsage();
+                return;
             }
 
             String rootFolder = cli.getOptionValue(OptionConstants.INSERT_SHORT);
@@ -50,20 +51,19 @@ public class InsertEngine implements Runnable {
 
             File root = new File(rootFolder);
             if (cli.hasOption(OptionConstants.INFO_LONG)) {
-                LOGGER.setLevel(Level.ALL);
-                String logFilePath = root.getAbsolutePath() + File.separator + InserterConstants.LOG_FILENAME;
-                FileHandler fileHandler = new FileHandler(logFilePath);
-                fileHandler.setFormatter(new SimpleFormatter());
-                fileHandler.setLevel(Level.ALL);
-                LOGGER.addHandler(fileHandler);
+                enableLogging(root.getAbsolutePath());
             }
 
             File noticeFile = new File(noticePath);
             String notice = this.manipulator.readFromFile(noticeFile);
+            if(cli.hasOption(OptionConstants.BLANK_SHORT)){
+                notice = insertBlankSpaceAfterNotice(notice);
+            }
+
             Inserter inserter = new Inserter(this.manipulator, extensions);
             inserter.insert(root, notice, noticePotition);
 
-            if (inserter.getFailedIserts() == 0) {
+            if (!inserter.isHasError()) {
                 writer.writeLine(UserMessagesConstants.SUCCESFULL_OPERATION_MESSAGE);
             } else {
                 writer.writeLine(
@@ -75,11 +75,29 @@ public class InsertEngine implements Runnable {
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
         } catch (SecurityException e) {
-            LOGGER.log(Level.SEVERE, "security violation has occurred: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Security violation has occurred: " + e.getMessage());
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Unknown exception: " + e.getClass().getName());
         }
+    }
+
+    private void enableLogging(String rootPath) throws SecurityException, IOException{
+        LOGGER.setLevel(Level.ALL);
+        String logFilePath = rootPath + File.separator + InserterConstants.LOG_FILENAME;
+        FileHandler fileHandler = new FileHandler(logFilePath);
+        fileHandler.setFormatter(new SimpleFormatter());
+        fileHandler.setLevel(Level.ALL);
+        LOGGER.addHandler(fileHandler);
+    }
+
+    private String insertBlankSpaceAfterNotice(String notice){
+        int blankLines = Integer.parseInt(cli.getOptionValue("blank"));
+        for (int i = 0; i < blankLines; i++) {
+            notice += InserterConstants.LINE_SEPARATOR;
+        }
+
+        return notice;
     }
 }

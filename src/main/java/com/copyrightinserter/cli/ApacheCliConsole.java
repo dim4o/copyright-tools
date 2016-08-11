@@ -72,6 +72,13 @@ public class ApacheCliConsole extends AbstractConsole {
                 .optionalArg(true)
                 .desc("Enables job info console logging").build());
 
+        // Add blank line(s) after notice
+        options.addOption(Option.builder(OptionConstants.BLANK_SHORT)
+                .longOpt(OptionConstants.BLANK_LONG)
+                .optionalArg(true)
+                .desc(UsageConstants.BLANK_OPTION_DESC)
+                .hasArg().build());
+
         return options;
     }
 
@@ -79,7 +86,7 @@ public class ApacheCliConsole extends AbstractConsole {
     public void parse() throws ArgumentParseException {
         CommandLineParser parser = new DefaultParser();
         try {
-            this.cmd = parser.parse(options, this.getArguments());
+            this.cmd = parser.parse(options, this.arguments);
         } catch (ParseException e) {
             throw new ArgumentParseException(e.getMessage());
         }

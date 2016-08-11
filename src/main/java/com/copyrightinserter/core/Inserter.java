@@ -1,4 +1,4 @@
-package com.copyrightinserter.inserter;
+package com.copyrightinserter.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +16,7 @@ public class Inserter {
 
     private FileManipulator manipulator;
 
-    private int succeedInserts = 0;
-
-    private int failedIserts = 0;
+    private boolean hasError = false;
 
     public Inserter(FileManipulator manipulator, String[] extensions) throws IOException {
         this.extensions = extensions;
@@ -61,13 +59,12 @@ public class Inserter {
                         }
 
                         LOGGER.log(Level.INFO, String.format("%s - DONE", file.getName()));
-                        this.succeedInserts++;
                     }
                 } catch (IOException e) {
-                    this.failedIserts++;
-                    LOGGER.log(Level.SEVERE, String.format("%s - FAILS", file.getName()));
+                    this.hasError = true;
+                    LOGGER.log(Level.SEVERE, String.format("%s - ERROR - %s", file.getName(), e.getMessage()));
                 } catch (AlreadyInsertedException e) {
-                    this.failedIserts++;
+                    this.hasError = true;
                     LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s",
                             file.getName(), e.getMessage()));
                 }
@@ -87,11 +84,7 @@ public class Inserter {
         return false;
     }
 
-    public int getSucceedInserts() {
-        return succeedInserts;
-    }
-
-    public int getFailedIserts() {
-        return failedIserts;
+    public boolean isHasError() {
+        return hasError;
     }
 }
