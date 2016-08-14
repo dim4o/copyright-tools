@@ -18,6 +18,8 @@ public class UsageConstants {
 
 	public static final String BLANK_OPTION_DESC = "Add user defined number of blank lines after notice";
 
+	public static final String REMOVE_DESC = "Removes copyright notice";
+
 	public static final String USAGE = "[-i] [<folder path>] [-n] [<notice path>] [-e] [.<ext1> .<ext2>...]";
 
 	public static final String HEADER = "Copyright inserter options";
