@@ -86,6 +86,13 @@ public class ApacheCliConsole extends AbstractConsole {
                 .desc(UsageConstants.REMOVE_DESC)
                 .build());
 
+        // Removes copyright notice
+        options.addOption(Option.builder()
+                .longOpt(OptionConstants.REPLACE_LONG)
+                .hasArg()
+                .desc(UsageConstants.REPLACE_DESC)
+                .build());
+
         return options;
     }
 

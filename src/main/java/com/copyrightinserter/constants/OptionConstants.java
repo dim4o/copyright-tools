@@ -39,6 +39,8 @@ public class OptionConstants {
 
     public static final String REMOVE_LONG = "remove";
 
+    public static final String REPLACE_LONG = "replace";
+
     // Top option
     public static final String TOP_SHORT = "t";
 

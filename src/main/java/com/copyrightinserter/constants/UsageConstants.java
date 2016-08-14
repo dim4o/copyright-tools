@@ -20,6 +20,8 @@ public class UsageConstants {
 
 	public static final String REMOVE_DESC = "Removes copyright notice";
 
+	public static final String REPLACE_DESC = "Replace old copyright notice with new one.";
+
 	public static final String USAGE = "[-i] [<folder path>] [-n] [<notice path>] [-e] [.<ext1> .<ext2>...]";
 
 	public static final String HEADER = "Copyright inserter options";
