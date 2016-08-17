@@ -74,7 +74,7 @@ public class Inserter {
         }
     }
 
-    boolean containsExtension(File file, String[] fileExtensions) {
+    private boolean containsExtension(File file, String[] fileExtensions) {
         for (String extension : fileExtensions) {
             if (file.getName().endsWith(extension)) {
                 return true;
