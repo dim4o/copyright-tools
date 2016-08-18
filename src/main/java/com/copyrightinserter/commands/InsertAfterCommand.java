@@ -1,15 +1,17 @@
 package com.copyrightinserter.commands;
 
+import java.io.File;
+
 import com.copyrightinserter.constants.InserterConstants;
 
-public class InsertAfterCommand extends AbstractCommand{
+public class InsertAfterCommand extends AbstractCommand {
 
     public InsertAfterCommand(Object... args){
-     // TODO: initialize fields
+        super(args);
     }
 
     @Override
-    protected void execute() throws Exception {
-        this.manipulator.writeToFile(this.file, InserterConstants.LINE_SEPARATOR + this.notice);
+    protected void executeOnce(File targetFile) throws Exception {
+        this.manipulator.writeToFile(targetFile, InserterConstants.LINE_SEPARATOR + this.notice);
     }
 }

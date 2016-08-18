@@ -8,25 +8,21 @@ import com.copyrightinserter.exceptions.AlreadyInsertedException;
 
 public class InsertBeforeCommand extends AbstractCommand {
 
+    //private File file;
+
     public InsertBeforeCommand(Object... args){
-     // TODO: initialize fields
+        super(args);
     }
 
     @Override
-    protected void execute() throws IOException, AlreadyInsertedException {
-        String source = this.manipulator.readFromFile(this.file);
+    protected void executeOnce(File targetFile) throws IOException, AlreadyInsertedException {
+        String source = this.manipulator.readFromFile(targetFile);
         if (source.startsWith(this.notice)) {
             throw new AlreadyInsertedException("The notice you have tried to insert is already inserted.");
         }
         String begin = this.notice + InserterConstants.LINE_SEPARATOR;
         String newSource = begin + source;
 
-        this.file.delete();
-        this.file = new File(file.getAbsolutePath());
-        this.file.getParentFile().mkdirs();
-        this.file.createNewFile();
-
-        // TODO: consider whether this trim() is necessary
-        this.manipulator.writeToFile(this.file, newSource.trim());
+        this.manipulator.overrideFile(targetFile, newSource);
     }
 }

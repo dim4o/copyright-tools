@@ -19,18 +19,17 @@ public abstract class AbstractCommand {
 
     private String[] extensions;
 
-    protected File file;
+    private boolean hasError;
 
     protected FileManipulator manipulator;
 
-    protected abstract void execute() throws Exception;
+    protected abstract void executeOnce(File targetFile) throws Exception;
 
     AbstractCommand(Object... args){
         this.rootDir = (File)args[0];
         this.notice = (String)args[1];
         this.extensions = (String[])args[2];
         this.manipulator = (SourceManipulator)args[3];
-        this.file = (File)args[4];
     }
 
     public void executeRecursivly(){
@@ -41,14 +40,14 @@ public abstract class AbstractCommand {
                 boolean isExt = containsExtension(file, this.extensions);
                 try {
                     if (isExt) {
-                        execute();
+                        executeOnce(file);
                         LOGGER.log(Level.INFO, String.format("%s - DONE", file.getName()));
                     }
                 } catch (IOException e) {
-                    //this.hasError = true;
+                    this.hasError = true;
                     LOGGER.log(Level.SEVERE, String.format("%s - ERROR - %s", file.getName(), e.getMessage()));
                 } catch (AlreadyInsertedException e) {
-                    //this.hasError = true;
+                    this.hasError = true;
                     LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s",
                             file.getName(), e.getMessage()));
                 } catch (Exception e) {
@@ -68,5 +67,9 @@ public abstract class AbstractCommand {
         }
 
         return false;
+    }
+
+    public boolean isHasError() {
+        return this.hasError;
     }
 }

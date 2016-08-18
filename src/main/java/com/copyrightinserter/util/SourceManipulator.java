@@ -37,4 +37,15 @@ public class SourceManipulator implements FileManipulator {
             writer.write(source);
         }
     }
+
+    @Override
+    public void overrideFile(File file, String newSource) throws IOException {
+        file.delete();
+        file = new File(file.getAbsolutePath());
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        // TODO: consider whether this trim() is necessary
+        this.writeToFile(file, newSource.trim());
+    }
 }

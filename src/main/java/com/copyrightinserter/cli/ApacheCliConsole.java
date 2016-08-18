@@ -1,5 +1,7 @@
 package com.copyrightinserter.cli;
 
+import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -82,14 +84,14 @@ public class ApacheCliConsole extends AbstractConsole {
         // Removes copyright notice
         options.addOption(Option.builder(OptionConstants.REMOVE_SHORT)
                 .longOpt(OptionConstants.REMOVE_LONG)
-                .hasArg()
+                .hasArg(false)
                 .desc(UsageConstants.REMOVE_DESC)
                 .build());
 
         // Removes copyright notice
         options.addOption(Option.builder()
                 .longOpt(OptionConstants.REPLACE_LONG)
-                .hasArg()
+                .hasArg(false)
                 .desc(UsageConstants.REPLACE_DESC)
                 .build());
 
@@ -125,5 +127,10 @@ public class ApacheCliConsole extends AbstractConsole {
     @Override
     public String[] getOptionValues(String option) {
         return this.cmd.getOptionValues(option);
+    }
+
+    @Override
+    public String[] getArguments() {
+        return this.cmd.getArgs();
     }
 }

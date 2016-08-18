@@ -17,6 +17,8 @@ public abstract class AbstractConsole {
 
     public abstract String[] getOptionValues(String option);
 
+    public abstract String[] getArguments();
+
     public abstract void showUsage();
 
 }
