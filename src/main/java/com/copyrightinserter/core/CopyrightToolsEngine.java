@@ -48,8 +48,6 @@ public class CopyrightToolsEngine implements Runnable {
 
             String textConsoleCommand = cli.getArguments()[0];
 
-
-
             String rootFolderPath = cli.getOptionValue(OptionConstants.INSERT_SHORT);
             String noticePath = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
             String[] extensions = cli.getOptionValues(OptionConstants.EXTENSION_SHORT);

@@ -11,7 +11,22 @@ import java.io.Writer;
 
 import com.copyrightinserter.constants.InserterConstants;
 
+/**
+ * <p>
+ * Util class that manipulate with any kinds of source files.
+ * </p>
+ *
+ * @author dimcho.nedev
+ *
+ */
 public class SourceManipulator implements FileManipulator {
+    /**
+     * Reads the source file.
+     *
+     * @param file
+     *        - the given source file
+     * @return source file content
+     */
     @Override
     public String readFromFile(File file) throws FileNotFoundException, IOException {
         StringBuilder sourceBuilder = new StringBuilder();
@@ -30,14 +45,32 @@ public class SourceManipulator implements FileManipulator {
         return source;
     }
 
+    /**
+     * Writes copyright notice on end of the given file.
+     *
+     * @param file
+     *        - the given source file
+     * @param notice
+     *        - the copyright notice
+     * @throws IOException
+     */
     @Override
-    public void writeToFile(File file, String source) throws IOException {
+    public void writeToFile(File file, String notice) throws IOException {
 
         try (Writer writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(source);
+            writer.write(notice);
         }
     }
 
+    /**
+     * Overrides the original source file content with new source (with copyright notice).
+     *
+     * @param file
+     *        - the original source file with the old source
+     * @param newSource
+     *        - the new source with copyright notice
+     * @throws IOException
+     */
     @Override
     public void overrideFile(File file, String newSource) throws IOException {
         file.delete();
