@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.copyrightinserter.util.FileManipulator;
+
 public class RemoveCommand extends AbstractCommand {
 
-    public RemoveCommand(Object... args){
-        super(args);
+    public RemoveCommand(
+            String notice,
+            String[] extensions,
+            FileManipulator manipulator){
+        super(notice, extensions, manipulator);
     }
 
     @Override

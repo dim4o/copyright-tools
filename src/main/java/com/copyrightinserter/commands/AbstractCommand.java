@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import com.copyrightinserter.core.Inserter;
 import com.copyrightinserter.exceptions.AlreadyInsertedException;
 import com.copyrightinserter.util.FileManipulator;
-import com.copyrightinserter.util.SourceManipulator;
 
 public abstract class AbstractCommand {
     private static final Logger LOGGER = Logger.getLogger(Inserter.class.getName());
@@ -25,15 +24,17 @@ public abstract class AbstractCommand {
 
     protected abstract void executeOnce(File targetFile) throws Exception;
 
-    AbstractCommand(Object... args){
-        this.rootDir = (File)args[0];
-        this.notice = (String)args[1];
-        this.extensions = (String[])args[2];
-        this.manipulator = (SourceManipulator)args[3];
+    AbstractCommand(
+            String notice,
+            String[] extensions,
+            FileManipulator manipulator){
+        this.notice = notice;
+        this.extensions = extensions;
+        this.manipulator = manipulator;
     }
 
-    public void executeRecursivly(){
-        File[] files = this.rootDir.listFiles();
+    public void executeRecursivly(File targetLocation){
+        File[] files = targetLocation.listFiles();
 
         for (File file : files) {
             if (!file.isDirectory()) {
@@ -51,10 +52,10 @@ public abstract class AbstractCommand {
                     LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s",
                             file.getName(), e.getMessage()));
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    e.printStackTrace();
                 }
             } else {
-                executeRecursivly();
+                executeRecursivly(file);
             }
         }
     }

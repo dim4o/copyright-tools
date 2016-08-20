@@ -5,13 +5,15 @@ import java.io.IOException;
 
 import com.copyrightinserter.constants.InserterConstants;
 import com.copyrightinserter.exceptions.AlreadyInsertedException;
+import com.copyrightinserter.util.FileManipulator;
 
 public class InsertBeforeCommand extends AbstractCommand {
 
-    //private File file;
-
-    public InsertBeforeCommand(Object... args){
-        super(args);
+    public InsertBeforeCommand(
+            String notice,
+            String[] extensions,
+            FileManipulator manipulator){
+        super(notice, extensions, manipulator);
     }
 
     @Override

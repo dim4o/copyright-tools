@@ -29,10 +29,15 @@ public class CopyrightToolsEngine implements Runnable {
 
     private CommandFactory commandFactory;
 
-    public CopyrightToolsEngine(AbstractConsole cli, FileManipulator manipulator, Writer writer) {
+    public CopyrightToolsEngine(
+            AbstractConsole cli,
+            FileManipulator manipulator,
+            Writer writer,
+            CommandFactory commandFactory) {
         this.cli = cli;
         this.manipulator = manipulator;
         this.writer = writer;
+        this.commandFactory = commandFactory;
     }
 
     @Override
@@ -67,8 +72,13 @@ public class CopyrightToolsEngine implements Runnable {
             }
 
             // Add appropriate parameters
-            AbstractCommand command = commandFactory.create(textConsoleCommand, (Object)null);
-            command.executeRecursivly();
+            AbstractCommand command = commandFactory.create(
+                    textConsoleCommand,
+                    notice,
+                    extensions,
+                    this.manipulator);
+
+            command.executeRecursivly(rootDir);
 
             if (!command.isHasError()) {
                 writer.writeLine(UserMessagesConstants.SUCCESFULL_OPERATION_MESSAGE);
