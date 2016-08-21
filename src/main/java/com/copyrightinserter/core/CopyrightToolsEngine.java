@@ -11,12 +11,16 @@ import java.util.logging.SimpleFormatter;
 import com.copyrightinserter.cli.AbstractConsole;
 import com.copyrightinserter.commands.AbstractCommand;
 import com.copyrightinserter.commands.CommandFactory;
+import com.copyrightinserter.commands.CommandType;
+import com.copyrightinserter.constants.ConsoleCommandConstants;
 import com.copyrightinserter.constants.InserterConstants;
 import com.copyrightinserter.constants.OptionConstants;
 import com.copyrightinserter.constants.UserMessagesConstants;
 import com.copyrightinserter.exceptions.ArgumentParseException;
 import com.copyrightinserter.util.FileManipulator;
 import com.copyrightinserter.writer.Writer;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CopyrightToolsEngine implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(Inserter.class.getName());
@@ -56,9 +60,6 @@ public class CopyrightToolsEngine implements Runnable {
             String rootFolderPath = cli.getOptionValue(OptionConstants.INSERT_SHORT);
             String noticePath = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
             String[] extensions = cli.getOptionValues(OptionConstants.EXTENSION_SHORT);
-            NoticePosition noticePotition = cli.hasOption(OptionConstants.BOOTOM_SHORT)
-                    ? NoticePosition.Bottom
-                    : NoticePosition.Top;
 
             File rootDir = new File(rootFolderPath);
             if (cli.hasOption(OptionConstants.INFO_LONG)) {
@@ -71,9 +72,10 @@ public class CopyrightToolsEngine implements Runnable {
                 notice = insertBlankSpaceAfterNotice(notice);
             }
 
-            // Add appropriate parameters
+            CommandType commandType = resolveCommandType(textConsoleCommand);
+
             AbstractCommand command = commandFactory.create(
-                    textConsoleCommand,
+                    commandType,
                     notice,
                     extensions,
                     this.manipulator);
@@ -116,5 +118,28 @@ public class CopyrightToolsEngine implements Runnable {
         }
 
         return notice;
+    }
+
+    private CommandType resolveCommandType(String consoleCommand){
+
+        CommandType resultCommand = null;;
+        switch (consoleCommand) {
+        case ConsoleCommandConstants.INSERT:
+            boolean bootomCondition = this.cli.hasOption(OptionConstants.BOOTOM_SHORT);
+            resultCommand = bootomCondition
+                    ? CommandType.INSERT_AFTER
+                    : CommandType.INSERT_BEFORE;
+            break;
+        case ConsoleCommandConstants.REMOVE:
+            resultCommand = CommandType.REMOVE;
+            break;
+        case ConsoleCommandConstants.REPLACE:
+            resultCommand = CommandType.REPLACE;
+            break;
+        default:
+            throw new NotImplementedException();
+        }
+
+        return resultCommand;
     }
 }
