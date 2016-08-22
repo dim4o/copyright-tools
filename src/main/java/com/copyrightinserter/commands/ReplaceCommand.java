@@ -12,9 +12,10 @@ public class ReplaceCommand extends AbstractCommand {
     public ReplaceCommand(
             String notice,
             String[] extensions,
-            FileManipulator manipulator){
+            FileManipulator manipulator,
+            String newNotice){
         super(notice, extensions, manipulator);
-     // TODO: initialize newNotice
+            this.newNotice = newNotice;
     }
 
     @Override

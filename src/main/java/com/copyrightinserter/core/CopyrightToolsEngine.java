@@ -60,6 +60,13 @@ public class CopyrightToolsEngine implements Runnable {
             String rootFolderPath = cli.getOptionValue(OptionConstants.INSERT_SHORT);
             String noticePath = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
             String[] extensions = cli.getOptionValues(OptionConstants.EXTENSION_SHORT);
+            String newNotice = null;
+
+            if(cli.hasOption(OptionConstants.NEW_NOTICE_SHORT)){
+                String newNoticePath = cli.getOptionValue(OptionConstants.NEW_NOTICE_SHORT);
+                File newNoticeFile = new File(newNoticePath);
+                newNotice = this.manipulator.readFromFile(newNoticeFile);
+            }
 
             File rootDir = new File(rootFolderPath);
             if (cli.hasOption(OptionConstants.INFO_LONG)) {
@@ -78,7 +85,8 @@ public class CopyrightToolsEngine implements Runnable {
                     commandType,
                     notice,
                     extensions,
-                    this.manipulator);
+                    this.manipulator,
+                    newNotice);
 
             command.executeRecursivly(rootDir);
 

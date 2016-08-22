@@ -26,9 +26,10 @@ public class CommandFactory {
         case REMOVE:
             command = new RemoveCommand(notice, extension, manipulator);
             break;
-       /* case REPLACE:
-            //command = new ReplaceCommand(args);
-            break;*/
+        case REPLACE:
+            String newNotice = (String) args[3];
+            command = new ReplaceCommand(notice, extension, manipulator, newNotice);
+            break;
         default:
             throw new NotImplementedException();
         }

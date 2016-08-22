@@ -34,6 +34,10 @@ public class OptionConstants {
 
     public static final String NOTICE_LONG = "notice";
 
+    public static final String NEW_NOTICE_SHORT = "nn";
+
+    public static final String NEW_NOTICE_LONG = "new-notice";
+
     // Remove option
     public static final String REMOVE_SHORT = "r";
 
