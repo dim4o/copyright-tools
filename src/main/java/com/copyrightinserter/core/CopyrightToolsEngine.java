@@ -25,7 +25,7 @@ import com.copyrightinserter.writer.Writer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CopyrightToolsEngine implements Runnable {
-    private static final Logger LOGGER = Logger.getLogger(Inserter.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
 
     private AbstractConsole cli;
 
