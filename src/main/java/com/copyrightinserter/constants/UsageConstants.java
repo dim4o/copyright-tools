@@ -8,7 +8,7 @@ public class UsageConstants {
 
 	public static final String HELP_OPTION_DESC = "Display help";
 
-	public static final String INPUT_OPTION_DESC = "Path to input folder";
+	public static final String ROOT_OPTION_DESC = "Path to input folder";
 
 	public static final String INFO_DESC = "Enables job info console logging";
 

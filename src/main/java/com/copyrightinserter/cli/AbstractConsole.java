@@ -1,5 +1,7 @@
 package com.copyrightinserter.cli;
 
+import org.apache.commons.cli.MissingArgumentException;
+
 import com.copyrightinserter.exceptions.ArgumentParseException;
 
 public abstract class AbstractConsole {
@@ -13,7 +15,7 @@ public abstract class AbstractConsole {
 
     public abstract boolean hasOption(String option);
 
-    public abstract String getOptionValue(String option);
+    public abstract String getOptionValue(String option) throws MissingArgumentException;
 
     public abstract String[] getOptionValues(String option);
 

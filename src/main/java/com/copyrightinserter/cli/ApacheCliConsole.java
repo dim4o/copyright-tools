@@ -1,7 +1,5 @@
 package com.copyrightinserter.cli;
 
-import java.util.List;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -38,26 +36,30 @@ public class ApacheCliConsole extends AbstractConsole {
         options.addOption(Option.builder(OptionConstants.EXTENSION_SHORT)
                 .longOpt(OptionConstants.EXTENSION_LONG)
                 .optionalArg(false)
+                .required()
                 .desc(UsageConstants.EXTENSIONS_OPTION_DESC)
                 .hasArgs().build());
 
         // input folder location
-        options.addOption(Option.builder(OptionConstants.INSERT_SHORT)
-                .longOpt(OptionConstants.INSERT_LONG)
+        options.addOption(Option.builder(OptionConstants.ROOT_SHORT)
+                .longOpt(OptionConstants.ROOT_LONG)
                 .optionalArg(false)
-                .desc(UsageConstants.INPUT_OPTION_DESC)
+                .required()
+                .desc(UsageConstants.ROOT_OPTION_DESC)
                 .hasArg().build());
 
         // notice file location
         options.addOption(Option.builder(OptionConstants.NOTICE_SHORT)
                 .longOpt(OptionConstants.NOTICE_LONG)
                 .optionalArg(false)
+                .required()
                 .desc(UsageConstants.NOTICE_OPTION_DESC)
                 .hasArg().build());
 
-        // notice file location
+        // new notice file location
         options.addOption(Option.builder(OptionConstants.NEW_NOTICE_SHORT)
                 .longOpt(OptionConstants.NEW_NOTICE_LONG)
+                .optionalArg(false)
                 .desc(UsageConstants.NOTICE_OPTION_DESC)// TODO: change this
                 .hasArg().build());
 
@@ -83,23 +85,9 @@ public class ApacheCliConsole extends AbstractConsole {
         // Add blank line(s) after notice
         options.addOption(Option.builder(OptionConstants.BLANK_SHORT)
                 .longOpt(OptionConstants.BLANK_LONG)
-                .optionalArg(true)
+                .optionalArg(false)
                 .desc(UsageConstants.BLANK_OPTION_DESC)
                 .hasArg().build());
-
-        // Removes copyright notice
-        options.addOption(Option.builder(OptionConstants.REMOVE_SHORT)
-                .longOpt(OptionConstants.REMOVE_LONG)
-                .hasArg(false)
-                .desc(UsageConstants.REMOVE_DESC)
-                .build());
-
-        // Removes copyright notice
-        options.addOption(Option.builder()
-                .longOpt(OptionConstants.REPLACE_LONG)
-                .hasArg(false)
-                .desc(UsageConstants.REPLACE_DESC)
-                .build());
 
         return options;
     }
@@ -122,7 +110,12 @@ public class ApacheCliConsole extends AbstractConsole {
     @Override
     public void showUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(UsageConstants.USAGE, UsageConstants.HEADER, this.options, UsageConstants.FOOTER, false);
+        formatter.printHelp(
+                UsageConstants.USAGE,
+                UsageConstants.HEADER,
+                this.options,
+                UsageConstants.FOOTER,
+                false);
     }
 
     @Override

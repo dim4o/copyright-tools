@@ -45,6 +45,14 @@ public class SourceManipulator implements FileManipulator {
         return source;
     }
 
+    // TODO: for removal
+    @Override
+    public String readFromFile(String filePath) throws FileNotFoundException, IOException{
+        File file = new File(filePath);
+        String content = this.readFromFile(file);
+        return content;
+    }
+
     /**
      * Writes copyright notice on end of the given file.
      *
