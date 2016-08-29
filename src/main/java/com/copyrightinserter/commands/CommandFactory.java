@@ -1,15 +1,12 @@
 package com.copyrightinserter.commands;
 
-import java.io.File;
-
-import com.copyrightinserter.constants.ConsoleCommandConstants;
+import com.copyrightinserter.exceptions.InvalidCommandException;
 import com.copyrightinserter.util.FileManipulator;
 import com.copyrightinserter.util.SourceManipulator;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class CommandFactory {
-    public AbstractCommand create(CommandType commandType, Object... args){
+    public AbstractCommand create(CommandType commandType, Object... args)
+            throws InvalidCommandException{
         AbstractCommand command = null;
 
         String notice = (String) args[0];
@@ -31,7 +28,7 @@ public class CommandFactory {
             command = new ReplaceCommand(notice, extension, manipulator, newNotice);
             break;
         default:
-            throw new NotImplementedException();
+            throw new InvalidCommandException();
         }
 
         return command;

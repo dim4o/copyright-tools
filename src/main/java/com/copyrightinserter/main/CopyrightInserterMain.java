@@ -15,7 +15,6 @@ public class CopyrightInserterMain {
         FileManipulator manipulator = new SourceManipulator();
         Writer writer = new ConsoleWriter();
         CommandFactory commandFactrory = new CommandFactory();
-        //InsertEngine engine = new InsertEngine(cli, manipulator, writer);
         CopyrightToolsEngine engine = new CopyrightToolsEngine(cli, manipulator, writer, commandFactrory);
 
         engine.run();

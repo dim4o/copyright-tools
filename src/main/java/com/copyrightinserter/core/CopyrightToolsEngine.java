@@ -19,10 +19,9 @@ import com.copyrightinserter.constants.InserterConstants;
 import com.copyrightinserter.constants.OptionConstants;
 import com.copyrightinserter.constants.UserMessagesConstants;
 import com.copyrightinserter.exceptions.ArgumentParseException;
+import com.copyrightinserter.exceptions.InvalidCommandException;
 import com.copyrightinserter.util.FileManipulator;
 import com.copyrightinserter.writer.Writer;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CopyrightToolsEngine implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
@@ -134,7 +133,7 @@ public class CopyrightToolsEngine implements Runnable {
         return notice;
     }
 
-    private CommandType resolveCommandType(String consoleCommand) {
+    private CommandType resolveCommandType(String consoleCommand) throws InvalidCommandException {
 
         CommandType resultCommand = null;;
         switch (consoleCommand) {
@@ -151,7 +150,7 @@ public class CopyrightToolsEngine implements Runnable {
             resultCommand = CommandType.REPLACE;
             break;
         default:
-            throw new NotImplementedException();
+            throw new InvalidCommandException();
         }
 
         return resultCommand;
