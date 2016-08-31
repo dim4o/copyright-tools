@@ -10,12 +10,12 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
 
     private static final String NOT_INSERTED = "The notice is not inserted!";
 
-    private static final String SHOUL_NOT_START_WITH_NOTICE = "The file shouldn't start with notice";
+    private static final String SHOULD_NOT_START_WITH_NOTICE = "The file shouldn't start with notice";
 
     @Test
     public void baseInsertNoticeWithOneExtensionAndShortOptionsTest() throws FileNotFoundException, IOException {
         String command = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .java";
-        executeCommand(command);
+        this.executeCommand(command);
         String noticeWithBlankLineAfter = NOTICE + "\n";
 
         // There is copyright notice before the content
@@ -23,11 +23,11 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
         Assert.assertTrue(NOT_INSERTED, javaFile_2_content.startsWith(NOTICE));
 
         // No copyright notice before the content
-        Assert.assertFalse(SHOUL_NOT_START_WITH_NOTICE, csFile_1_content.startsWith(NOTICE));
-        Assert.assertFalse(SHOUL_NOT_START_WITH_NOTICE, csFile_2_content.startsWith(NOTICE));
-        Assert.assertFalse(SHOUL_NOT_START_WITH_NOTICE, cppFile_1_content.startsWith(NOTICE));
-        Assert.assertFalse(SHOUL_NOT_START_WITH_NOTICE, cppFile_2_1_content.startsWith(NOTICE));
-        Assert.assertFalse(SHOUL_NOT_START_WITH_NOTICE, cppFile_2_2_content.startsWith(NOTICE));
+        Assert.assertFalse(SHOULD_NOT_START_WITH_NOTICE, csFile_1_content.startsWith(NOTICE));
+        Assert.assertFalse(SHOULD_NOT_START_WITH_NOTICE, csFile_2_content.startsWith(NOTICE));
+        Assert.assertFalse(SHOULD_NOT_START_WITH_NOTICE, cppFile_1_content.startsWith(NOTICE));
+        Assert.assertFalse(SHOULD_NOT_START_WITH_NOTICE, cppFile_2_1_content.startsWith(NOTICE));
+        Assert.assertFalse(SHOULD_NOT_START_WITH_NOTICE, cppFile_2_2_content.startsWith(NOTICE));
 
         // No blank line between the notice and the source
         Assert.assertFalse(NOT_INSERTED, javaFile_1_content.startsWith(noticeWithBlankLineAfter));
@@ -37,7 +37,7 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
     @Test
     public void insertNoticeWithOneBlankLineTest() throws FileNotFoundException, IOException{
         String command = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .cs -bl 1";
-        executeCommand(command);
+        this.executeCommand(command);
         String noticeWithBlankLineAfter = NOTICE + System.getProperty("line.separator");
 
         // There is copyright notice before the content
@@ -48,7 +48,7 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
     @Test
     public void insertNoticeForTwoFileExtensionsTest() throws FileNotFoundException, IOException{
         String command = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .cs .java";
-        executeCommand(command);
+        this.executeCommand(command);
 
         // There is copyright notice before the content
         Assert.assertTrue(NOT_INSERTED, csFile_1_content.startsWith(NOTICE));

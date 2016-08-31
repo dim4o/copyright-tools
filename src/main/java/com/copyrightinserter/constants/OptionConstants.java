@@ -14,7 +14,7 @@ public class OptionConstants {
     // Extension option
     public static final String EXTENSION_SHORT = "e";
 
-    public static final String EXTENSION_LONG = "extension";
+    public static final String EXTENSION_LONG = "extensions";
 
     // Help option
     public static final String HELP_SHORT = "h";

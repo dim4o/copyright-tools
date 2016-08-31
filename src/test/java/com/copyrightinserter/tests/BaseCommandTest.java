@@ -24,6 +24,10 @@ import com.copyrightinserter.writer.ConsoleWriter;
 
 public class BaseCommandTest {
 
+    protected static final String NOT_INSERTED = "The notice is not inserted!";
+
+    protected static final String SHOULD_NOT_START_WITH_NOTICE = "The file shouldn't start with notice";
+
     private static final String SAMPLE_CONTENT =
             "This is sample content line 1."
             + System.getProperty("line.separator")
