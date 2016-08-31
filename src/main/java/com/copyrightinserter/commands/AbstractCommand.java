@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.copyrightinserter.core.CopyrightToolsEngine;
 import com.copyrightinserter.exceptions.AlreadyInsertedException;
 import com.copyrightinserter.util.FileManipulator;
 
 public abstract class AbstractCommand {
-    private static final Logger LOGGER = Logger.getLogger(AbstractCommand.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
 
     // TODO: for removal
     private File rootDir;

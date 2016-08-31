@@ -26,6 +26,8 @@ import com.copyrightinserter.writer.Writer;
 public class CopyrightToolsEngine implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
 
+    private FileHandler fileHandler;
+
     private AbstractConsole cli;
 
     private FileManipulator manipulator;
@@ -98,6 +100,10 @@ public class CopyrightToolsEngine implements Runnable {
                             UserMessagesConstants.FAILD_OPERTION_MESSAGE,
                             rootDir.getAbsolutePath() + File.separator + InserterConstants.LOG_FILENAME);
                 }
+                if(this.fileHandler != null){
+                    this.fileHandler.close();
+                    LOGGER.removeHandler(this.fileHandler);
+                }
             }
 
         } catch (MissingArgumentException e) {
@@ -118,7 +124,7 @@ public class CopyrightToolsEngine implements Runnable {
     private void enableLogging(String rootPath) throws SecurityException, IOException{
         LOGGER.setLevel(Level.ALL);
         String logFilePath = rootPath + File.separator + InserterConstants.LOG_FILENAME;
-        FileHandler fileHandler = new FileHandler(logFilePath);
+        this.fileHandler = new FileHandler(logFilePath);
         fileHandler.setFormatter(new SimpleFormatter());
         fileHandler.setLevel(Level.ALL);
         LOGGER.addHandler(fileHandler);

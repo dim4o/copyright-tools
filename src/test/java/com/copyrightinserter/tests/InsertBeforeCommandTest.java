@@ -14,8 +14,8 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
 
     @Test
     public void baseInsertNoticeWithOneExtensionAndShortOptionsTest() throws FileNotFoundException, IOException {
-        String command = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .java";
-        this.executeCommand(command);
+        String insertCommand = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .java";
+        this.executeCommand(insertCommand);
         String noticeWithBlankLineAfter = NOTICE + "\n";
 
         // There is copyright notice before the content

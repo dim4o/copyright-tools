@@ -8,6 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Assume;
@@ -143,7 +146,7 @@ public class BaseCommandTest {
         cppFile_2_2_content = readFromFile(cppFile22);
     }
 
-    private String readFromFile(File file) throws FileNotFoundException, IOException {
+    protected String readFromFile(File file) throws FileNotFoundException, IOException {
         StringBuilder sourceBuilder = new StringBuilder();
         String line = InserterConstants.EMPTY_STRING;
         String source = null;
