@@ -162,6 +162,12 @@ public class BaseCommandTest {
         return source;
     }
 
+    protected void writeToFile(File file, String notice) throws IOException {
+        try (Writer writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.write(notice);
+        }
+    }
+
     private static void deleteFilesRecursively(File rootFolder) {
         File[] files = rootFolder.listFiles();
         for (File file : files) {
