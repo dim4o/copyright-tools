@@ -133,7 +133,11 @@ public class CopyrightToolsEngine implements Runnable {
     private String insertBlankSpaceAfterNotice(String notice) throws NumberFormatException, MissingArgumentException {
         int blankLines = Integer.parseInt(cli.getOptionValue(OptionConstants.BLANK_SHORT));
         for (int i = 0; i < blankLines; i++) {
-            notice += InserterConstants.LINE_SEPARATOR;
+            if(this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
+                notice = InserterConstants.LINE_SEPARATOR + notice;
+            } else {
+                notice += InserterConstants.LINE_SEPARATOR;
+            }
         }
 
         return notice;

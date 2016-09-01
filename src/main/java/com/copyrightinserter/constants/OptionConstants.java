@@ -37,9 +37,4 @@ public class OptionConstants {
     public static final String NEW_NOTICE_SHORT = "nn";
 
     public static final String NEW_NOTICE_LONG = "new-notice";
-
-    // Top option
-    public static final String TOP_SHORT = "t";
-
-    public static final String TOP_LONG = "top";
 }

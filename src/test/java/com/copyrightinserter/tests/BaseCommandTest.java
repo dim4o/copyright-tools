@@ -8,9 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Assume;
@@ -27,9 +24,11 @@ import com.copyrightinserter.writer.ConsoleWriter;
 
 public class BaseCommandTest {
 
-    protected static final String NOT_INSERTED = "The notice is not inserted!";
+    protected static final String NOT_INSERTED =
+            "The notice is not inserted!";
 
-    protected static final String SHOULD_NOT_START_WITH_NOTICE = "The file shouldn't start with notice";
+    protected static final String SHOULD_NOT_START_WITH_NOTICE =
+            "The file shouldn't start with notice";
 
     private static final String SAMPLE_CONTENT =
             "This is sample content line 1."

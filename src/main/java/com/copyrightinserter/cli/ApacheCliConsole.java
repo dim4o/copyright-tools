@@ -63,13 +63,6 @@ public class ApacheCliConsole extends AbstractConsole {
                 .desc(UsageConstants.NOTICE_OPTION_DESC)// TODO: change this
                 .hasArg().build());
 
-        // Insert on top of the source
-        options.addOption(Option.builder(OptionConstants.TOP_SHORT)
-                .longOpt(OptionConstants.TOP_LONG)
-                .optionalArg(false)
-                .desc(UsageConstants.TOP_OPTION_DESC)
-                .hasArg(false).build());
-
         // Insert on bottom of the source
         options.addOption(Option.builder(OptionConstants.BOOTOM_SHORT)
                 .longOpt(OptionConstants.BOTTOM_LONG)
