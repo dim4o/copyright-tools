@@ -3,7 +3,7 @@ apply plugin: 'application'
 
 version = '0.0.1'
 
-mainClassName = 'com.copyrightinserter.main.CopyrightInserterMain'
+mainClassName = 'com.coprtools.main.CopyrightToolsMain'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -15,7 +15,7 @@ jar {
         }
     }
     manifest {
-        attributes 'Implementation-Title': 'Copyright Inserter',
+        attributes 'Implementation-Title': 'Copyright Tools',
                    'Implementation-Version': version,
 				   'Main-Class': mainClassName
     }
