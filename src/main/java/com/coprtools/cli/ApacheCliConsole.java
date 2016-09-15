@@ -82,6 +82,13 @@ public class ApacheCliConsole extends AbstractConsole {
                 .desc(UsageConstants.BLANK_OPTION_DESC)
                 .hasArg().build());
 
+        // TODO: Add description to this option
+        options.addOption(Option.builder(OptionConstants.OUTPUT_SHORT)
+                .longOpt(OptionConstants.OUTPUT_LONG)
+                .optionalArg(true)
+                .desc("")
+                .hasArg().build());
+
         return options;
     }
 

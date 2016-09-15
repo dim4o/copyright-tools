@@ -72,6 +72,15 @@ public class CopyrightToolsEngine implements Runnable {
                 }
 
                 File rootDir = new File(rootFolderPath);
+                File destinationFolder = null;
+
+                if(cli.hasOption(OptionConstants.OUTPUT_SHORT)) {
+                    String destinationPath = cli.getOptionValue(OptionConstants.OUTPUT_SHORT);
+                    destinationFolder = new File(destinationPath);
+                    this.manipulator.copyFolder(rootDir, destinationFolder);
+                    rootDir = destinationFolder;
+                }
+
                 if (cli.hasOption(OptionConstants.INFO_LONG)) {
                     enableLogging(rootDir.getAbsolutePath());
                 }

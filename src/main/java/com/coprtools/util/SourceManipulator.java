@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import org.apache.commons.io.FileUtils;
+
 import com.coprtools.constants.InserterConstants;
 
 /**
@@ -43,14 +45,6 @@ public class SourceManipulator implements FileManipulator {
         }
 
         return source;
-    }
-
-    // TODO: for removal
-    @Override
-    public String readFromFile(String filePath) throws FileNotFoundException, IOException{
-        File file = new File(filePath);
-        String content = this.readFromFile(file);
-        return content;
     }
 
     /**
@@ -88,5 +82,19 @@ public class SourceManipulator implements FileManipulator {
 
         // TODO: consider whether this trim() is necessary
         this.writeToFile(file, newSource.trim());
+    }
+
+    /**
+     * Copy a folder and all its subfolders and files into another folder.
+     *
+     * @param sourceFolder
+     *        - the source folder
+     * @param destinationFolder
+     *        - the destination folder
+     * @throws IOException
+     */
+    @Override
+    public void copyFolder(File sourceFolder, File destinationFolder) throws IOException {
+        FileUtils.copyDirectory(sourceFolder, destinationFolder);
     }
 }
