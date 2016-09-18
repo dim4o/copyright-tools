@@ -88,7 +88,7 @@ public class CopyrightToolsEngine implements Runnable {
                 File noticeFile = new File(noticePath);
                 String notice = this.manipulator.readFromFile(noticeFile);
                 if(cli.hasOption(OptionConstants.BLANK_SHORT)){
-                    notice = insertBlankSpaceAfterNotice(notice);
+                    notice = insertBlankSpace(notice);
                 }
 
                 CommandType commandType = resolveCommandType(textConsoleCommand);
@@ -139,14 +139,11 @@ public class CopyrightToolsEngine implements Runnable {
         LOGGER.addHandler(fileHandler);
     }
 
-    private String insertBlankSpaceAfterNotice(String notice) throws NumberFormatException, MissingArgumentException {
-        int blankLines = Integer.parseInt(cli.getOptionValue(OptionConstants.BLANK_SHORT));
-        for (int i = 0; i < blankLines; i++) {
-            if(this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
-                notice = InserterConstants.LINE_SEPARATOR + notice;
-            } else {
-                notice += InserterConstants.LINE_SEPARATOR;
-            }
+    private String insertBlankSpace(String notice) {
+        if(this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
+            notice = InserterConstants.LINE_SEPARATOR + notice;
+        } else {
+            notice += InserterConstants.LINE_SEPARATOR;
         }
 
         return notice;

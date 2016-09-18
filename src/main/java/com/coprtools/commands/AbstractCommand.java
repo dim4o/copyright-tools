@@ -13,9 +13,6 @@ public abstract class AbstractCommand {
 
     private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
 
-    // TODO: for removal
-    private File rootDir;
-
     protected String notice;
 
     private String[] extensions;
@@ -61,35 +58,6 @@ public abstract class AbstractCommand {
             }
         }
     }
-
-    // TODO: for removal
-    /*public void executeRecursivly(){
-        File[] files = this.rootDir.listFiles();
-
-        for (File file : files) {
-            if (!file.isDirectory()) {
-                boolean isExt = containsExtension(file, this.extensions);
-                try {
-                    if (isExt) {
-                        executeOnce(file);
-                        LOGGER.log(Level.INFO, String.format("%s - DONE", file.getName()));
-                    }
-                } catch (IOException e) {
-                    this.hasError = true;
-                    LOGGER.log(Level.SEVERE, String.format("%s - ERROR - %s", file.getName(), e.getMessage()));
-                } catch (AlreadyInsertedException e) {
-                    this.hasError = true;
-                    LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s",
-                            file.getName(), e.getMessage()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                this.rootDir = file;
-                executeRecursivly();
-            }
-        }
-    }*/
 
     private boolean containsExtension(File file, String[] fileExtensions) {
         for (String extension : fileExtensions) {

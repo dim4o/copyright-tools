@@ -60,7 +60,7 @@ public class ApacheCliConsole extends AbstractConsole {
         options.addOption(Option.builder(OptionConstants.NEW_NOTICE_SHORT)
                 .longOpt(OptionConstants.NEW_NOTICE_LONG)
                 .optionalArg(false)
-                .desc(UsageConstants.NOTICE_OPTION_DESC)// TODO: change this
+                .desc(UsageConstants.NEW_NOTICE_OPTION_DESC)
                 .hasArg().build());
 
         // Insert on bottom of the source
@@ -73,20 +73,18 @@ public class ApacheCliConsole extends AbstractConsole {
         options.addOption(Option.builder()
                 .longOpt(OptionConstants.INFO_LONG)
                 .optionalArg(true)
-                .desc("Enables job info console logging").build());
+                .desc(UsageConstants.INFO_OPTION_DESC).build());
 
-        // Add blank line(s) after notice
+        // Add blank line before/after notice
         options.addOption(Option.builder(OptionConstants.BLANK_SHORT)
                 .longOpt(OptionConstants.BLANK_LONG)
-                .optionalArg(false)
-                .desc(UsageConstants.BLANK_OPTION_DESC)
-                .hasArg().build());
+                .optionalArg(true)
+                .desc(UsageConstants.BLANK_OPTION_DESC).build());
 
-        // TODO: Add description to this option
         options.addOption(Option.builder(OptionConstants.OUTPUT_SHORT)
                 .longOpt(OptionConstants.OUTPUT_LONG)
                 .optionalArg(true)
-                .desc("")
+                .desc(UsageConstants.OUTPUT_OPTION_DESC)
                 .hasArg().build());
 
         return options;

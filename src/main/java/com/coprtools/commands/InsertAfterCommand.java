@@ -17,6 +17,6 @@ public class InsertAfterCommand extends AbstractCommand {
 
     @Override
     protected void executeOnce(File targetFile) throws IOException  {
-        this.manipulator.writeToFile(targetFile, InserterConstants.LINE_SEPARATOR + this.notice);
+        this.manipulator.writeToFile(targetFile, this.notice);
     }
 }
