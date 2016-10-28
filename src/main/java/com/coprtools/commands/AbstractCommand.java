@@ -9,6 +9,9 @@ import com.coprtools.core.CopyrightToolsEngine;
 import com.coprtools.exceptions.AlreadyInsertedException;
 import com.coprtools.util.FileManipulator;
 
+/**
+ * An abstract class that represents type for the base command
+ */
 public abstract class AbstractCommand {
 
     private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
@@ -32,7 +35,15 @@ public abstract class AbstractCommand {
         this.manipulator = manipulator;
     }
 
-    public void executeRecursivly(File targetLocation){
+
+    /**
+     * Executes the current command recursively for all files
+     * in the specified target location directory
+     *
+     * @param targetLocation
+     *          - the target directory where the command will be executed
+     */
+    public void executeRecursively(File targetLocation){
         File[] files = targetLocation.listFiles();
 
         for (File file : files) {
@@ -54,11 +65,21 @@ public abstract class AbstractCommand {
                     e.printStackTrace();
                 }
             } else {
-                executeRecursivly(file);
+                executeRecursively(file);
             }
         }
     }
 
+
+    /**
+     * Checks whether an array of file extensions contains a specific file extension
+     *
+     * @param file
+     *          - the file which extension will be checked
+     * @param fileExtensions
+     *          - array of file extension
+     * @return
+     */
     private boolean containsExtension(File file, String[] fileExtensions) {
         for (String extension : fileExtensions) {
             if (file.getName().endsWith(extension)) {

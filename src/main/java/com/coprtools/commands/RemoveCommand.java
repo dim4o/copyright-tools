@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import com.coprtools.util.FileManipulator;
 
+/**
+ * Removes copyright notice from source file
+ */
 public class RemoveCommand extends AbstractCommand {
 
     public RemoveCommand(

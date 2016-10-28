@@ -1,4 +1,5 @@
 package com.coprtools.writer;
+
 public class ConsoleWriter implements Writer{
 
     @Override

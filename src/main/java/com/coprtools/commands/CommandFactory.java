@@ -4,7 +4,21 @@ import com.coprtools.exceptions.InvalidCommandException;
 import com.coprtools.util.FileManipulator;
 import com.coprtools.util.SourceManipulator;
 
+/**
+ * A class that is responsible to create command object
+ */
 public class CommandFactory {
+    /**
+     * Creates the desired AbstractCommand object by given command type and
+     * specific set of parameters
+     *
+     * @param commandType
+     *        - the type of the command
+     * @param args
+     *        - the command arguments
+     * @return the desired command object
+     * @throws InvalidCommandException
+     */
     public AbstractCommand create(CommandType commandType, Object... args)
             throws InvalidCommandException{
         AbstractCommand command = null;

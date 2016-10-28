@@ -100,7 +100,7 @@ public class CopyrightToolsEngine implements Runnable {
                         this.manipulator,
                         newNotice);
 
-                command.executeRecursivly(rootDir);
+                command.executeRecursively(rootDir);
 
                 if (!command.isHasError()) {
                     writer.writeLine(UserMessagesConstants.SUCCESFULL_OPERATION_MESSAGE);

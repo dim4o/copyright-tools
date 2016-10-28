@@ -7,6 +7,9 @@ import com.coprtools.constants.InserterConstants;
 import com.coprtools.exceptions.AlreadyInsertedException;
 import com.coprtools.util.FileManipulator;
 
+/**
+ * Inserts a copyright notice before the source code(file content)
+ */
 public class InsertBeforeCommand extends AbstractCommand {
 
     public InsertBeforeCommand(

@@ -3,9 +3,11 @@ package com.coprtools.commands;
 import java.io.File;
 import java.io.IOException;
 
-import com.coprtools.constants.InserterConstants;
 import com.coprtools.util.FileManipulator;
 
+/**
+ * Inserts a copyright notice after the source code (file content)
+ */
 public class InsertAfterCommand extends AbstractCommand {
 
     public InsertAfterCommand(
