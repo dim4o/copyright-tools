@@ -43,11 +43,11 @@ public class ReplaceCommandTest extends BaseCommandTest {
         String insertCommand = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .cpp .java";
         this.executeCommand(insertCommand);
         String replaceCommand =
-                "replace -r ./temp/RootDir -n ./temp/notice.txt -nn ./temp/new-notice.txt -e .java";
+                "replace -r ./temp/rootDir -n ./temp/notice.txt -nn ./temp/new-notice.txt -e .java";
         this.executeCommand(replaceCommand);
 
         Assert.assertTrue(SHOOLD_START_WITH_NEW_NOTICE, javaFile_1_content.startsWith(NEW_NOTICE));
-        Assert.assertTrue(SHOOLD_START_WITH_NEW_NOTICE, javaFile_2_content.startsWith(NEW_NOTICE));
+        Assert.assertTrue(SHOOLD_START_WITH_NEW_NOTICE, javaFile_2_content.startsWith(NEW_NOTICE+System.getProperty("line.separator")));
 
         Assert.assertFalse(SHOOLD_NOT_START_WITH_NEW_NOTICE, csFile_1_content.startsWith(NEW_NOTICE));
         Assert.assertFalse(SHOOLD_NOT_START_WITH_NEW_NOTICE, csFile_2_content.startsWith(NEW_NOTICE));

@@ -32,7 +32,7 @@ public class InsertBeforeCommandTest extends BaseCommandTest {
     public void baseInsertNoticeWithOneExtensionAndShortOptionsTest() throws FileNotFoundException, IOException {
         String insertCommand = "insert -r ./temp/rootDir -n ./temp/notice.txt -e .java";
         this.executeCommand(insertCommand);
-        String noticeWithBlankLineAfter = NOTICE + "\n";
+        String noticeWithBlankLineAfter = NOTICE + System.getProperty("line.separator") + System.getProperty("line.separator");
 
         // There is copyright notice before the content
         Assert.assertTrue(NOT_INSERTED, javaFile_1_content.startsWith(NOTICE));
