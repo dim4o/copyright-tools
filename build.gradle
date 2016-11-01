@@ -17,7 +17,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'Copyright Tools',
                    'Implementation-Version': version,
-				   'Main-Class': mainClassName
+                   'Main-Class': mainClassName
     }
 }
 
@@ -37,9 +37,9 @@ libsDirName = 'lib'
 task testJar(type: Jar)
 
 run {
-	//if ( project.hasProperty("appArgs") ) {
-	//	args Eval.me(appArgs)
-	//}
+    //if ( project.hasProperty("appArgs") ) {
+    //    args Eval.me(appArgs)
+    //}
     standardInput = System.in
 }
 
