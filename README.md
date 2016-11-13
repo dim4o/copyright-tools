@@ -25,15 +25,16 @@ The commands require `root`, `notice` and `extensions` arguments.
 
 
 
-### Arguments
-* `-h` or `--help` - help. This is an optional argument.
-* `-r` or `--root` - path to the root directory. If the path contains `\` character you must to replace with `\\`. This is a mandatory argument.
-* `-n` or `--notice` - path to input folder. If the path contains `\` character you must to replace with `\\`.
+### Options and arguments
+* `-h` or `--help` - prints help, no mandatory option with no arguments.
+* `-r` or `--root` - option for a path to the root directory. Requires a path to the source folder as argument. If the path contains `\` character you must to replace with `\\`. This is a mandatory option.
+* `-n` or `--notice` - the option requires a path to the notice as argument. If the path contains `\` character you must to replace with `\\`. Mandatory option.
 * `-e` or `--extensions` - list of the file extensions on which you want to execute the command. Example: `.java .gradle`.
 * `-bl` or `--blank` - with this option a blank line will be inserted after the notice. If you use with a `--bootom` option a blank line will be inserted before the notice.
 * `-i` or `--info` - enable log info. Log file will be created in the root directory.
 * `-nn` or `--new-notice` - if you want to replace an old notice with a new notice this will be the path to the new notice.
 * `-b` or `--bottom` - use this option if you want to insert notice after the source. This is an optional argument.
+* `-o` or `--output` - with this option you can specify an output directory. The result will be stored in the output folder and root's folder will stay unchanged. Requires a path to an output folder as argument. It's a no mandatory option.
 
 This is a standard argument's body:
 * `-r "<pathToInputFolder>" -n "<pathToNoticeTextFile>" -e <extensionsList>`
@@ -53,7 +54,10 @@ There are two ways:
 * If you want to insert the notice at the bottom of the code: just add `--bottom` to the above command (or `-b` option). In this case the blank line will be inserted *before* the notice.
 
 * Suppose you want to remove a notice from existing code, you may run:  
-`remove --root "C:/targetDir" --notice "C:/NoticeToRemove.txt"`.
+`remove --root "C:/targetDir" --notice "C:/NoticeToRemove.txt" -e .java`.
 
 * To replace an old copyright notice with a new one:  
-`repalce -r "C:/targetDir" -n "C:/old-notice.txt" -nn "C:/new-notice.txt"`
+`repalce -r "C:/targetDir" -n "C:/old-notice.txt" -nn "C:/new-notice.txt" -e .java`
+
+* If you want to keep your original files untouched - simply run the above commands with `--output` (or `-o`) option and a path to desired output destination as an argument:  
+`insert -r "C:\\targetDir" -n "C:\\Notice.txt" -e .java .gradle -bl -o "C:\\output" -e .java`.
