@@ -40,7 +40,10 @@ public class ReplaceCommand extends AbstractCommand {
     @Override
     protected void executeOnce(File targetFile) throws FileNotFoundException, IOException {
         String source = this.manipulator.readFromFile(targetFile);
-        String newSource = source.replaceFirst(this.notice, this.newNotice).trim();
-        this.manipulator.overrideFile(targetFile, newSource);
+        if (source.contains(notice)) {
+            String newSource = source.replaceFirst(this.notice, this.newNotice).trim();
+            this.manipulator.overrideFile(targetFile, newSource);
+        }
     }
+
 }
