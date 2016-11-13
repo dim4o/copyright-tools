@@ -35,13 +35,16 @@ public class UsageConstants {
 
 	public static final String TOP_OPTION_DESC = "Insert on top";
 
-	public static final String BLANK_OPTION_DESC = "Add user defined number of blank lines after notice";
+	public static final String BLANK_OPTION_DESC = "Add a blank line after(or before with '-b' option) a notice";
 
 	public static final String REMOVE_DESC = "Removes copyright notice";
 
 	public static final String REPLACE_DESC = "Replace old copyright notice with new one.";
 
 	public static final String OUTPUT_OPTION_DESC = "Writes the result to specific output folder.";
+
+	public static final String STRING_OPTION_DESC = "The notice argument will be parsed as a string (not as a file path). "
+	        + "With this option you can remove/replace a string.";
 
 	public static final String INFO_OPTION_DESC = "Enables job info console logging";
 

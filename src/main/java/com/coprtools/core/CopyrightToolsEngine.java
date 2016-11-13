@@ -52,10 +52,7 @@ public class CopyrightToolsEngine implements Runnable {
 
     private CommandFactory commandFactory;
 
-    public CopyrightToolsEngine(
-            AbstractConsole cli,
-            FileManipulator manipulator,
-            Writer writer,
+    public CopyrightToolsEngine(AbstractConsole cli, FileManipulator manipulator, Writer writer,
             CommandFactory commandFactory) {
         this.cli = cli;
         this.manipulator = manipulator;
@@ -71,7 +68,7 @@ public class CopyrightToolsEngine implements Runnable {
 
             if (cli.hasOption(OptionConstants.HELP_SHORT)) {
                 cli.showUsage();
-            } else if(cli.getArguments().length == 0){
+            } else if (cli.getArguments().length == 0) {
                 throw new MissingArgumentException("Missing command!");
             } else {
                 String textConsoleCommand = cli.getArguments()[0];
@@ -81,7 +78,7 @@ public class CopyrightToolsEngine implements Runnable {
                 String[] extensions = cli.getOptionValues(OptionConstants.EXTENSION_SHORT);
                 String newNotice = null;
 
-                if(cli.hasOption(OptionConstants.NEW_NOTICE_SHORT)){
+                if (cli.hasOption(OptionConstants.NEW_NOTICE_SHORT) && !cli.hasOption(OptionConstants.STRING_SHORT)) {
                     String newNoticePath = cli.getOptionValue(OptionConstants.NEW_NOTICE_SHORT);
                     File newNoticeFile = new File(newNoticePath);
                     newNotice = this.manipulator.readFromFile(newNoticeFile);
@@ -90,21 +87,28 @@ public class CopyrightToolsEngine implements Runnable {
                 File rootDir = new File(rootFolderPath);
                 File destinationFolder = null;
 
-                if(cli.hasOption(OptionConstants.OUTPUT_SHORT)) {
+                if (cli.hasOption(OptionConstants.OUTPUT_SHORT)) {
                     String destinationPath = cli.getOptionValue(OptionConstants.OUTPUT_SHORT);
                     destinationFolder = new File(destinationPath);
                     this.manipulator.copyFolder(rootDir, destinationFolder);
                     rootDir = destinationFolder;
                 }
 
+                // Enables logging and creates a log file in the root path
                 if (cli.hasOption(OptionConstants.INFO_LONG)) {
-                    enableLogging(rootDir.getAbsolutePath());
+                    this.enableLogging(rootDir.getAbsolutePath());
                 }
 
-                File noticeFile = new File(noticePath);
-                String notice = this.manipulator.readFromFile(noticeFile);
-                if(cli.hasOption(OptionConstants.BLANK_SHORT)){
-                    notice = insertBlankSpace(notice);
+                String notice = null;
+                if (cli.hasOption("s")) {
+                    notice = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
+                    newNotice = cli.getOptionValue(OptionConstants.NEW_NOTICE_SHORT);
+                } else {
+                    File noticeFile = new File(noticePath);
+                    notice = this.manipulator.readFromFile(noticeFile);
+                    if (cli.hasOption(OptionConstants.BLANK_SHORT)) {
+                        notice = insertBlankSpace(notice);
+                    }
                 }
 
                 CommandType commandType = resolveCommandType(textConsoleCommand);
@@ -121,11 +125,10 @@ public class CopyrightToolsEngine implements Runnable {
                 if (!command.isHasError()) {
                     writer.writeLine(UserMessagesConstants.SUCCESFULL_OPERATION_MESSAGE);
                 } else {
-                    writer.writeLine(
-                            UserMessagesConstants.FAILD_OPERTION_MESSAGE,
+                    writer.writeLine(UserMessagesConstants.FAILD_OPERTION_MESSAGE,
                             rootDir.getAbsolutePath() + File.separator + InserterConstants.LOG_FILENAME);
                 }
-                if(this.fileHandler != null){
+                if (this.fileHandler != null) {
                     this.fileHandler.close();
                     LOGGER.removeHandler(this.fileHandler);
                 }
@@ -146,7 +149,15 @@ public class CopyrightToolsEngine implements Runnable {
         }
     }
 
-    private void enableLogging(String rootPath) throws SecurityException, IOException{
+    /**
+     * Enables the logging capabilities. Creates a log file in the roots path.
+     *
+     * @param rootPath
+     *            - the projects's root directory
+     * @throws SecurityException
+     * @throws IOException
+     */
+    private void enableLogging(String rootPath) throws SecurityException, IOException {
         LOGGER.setLevel(Level.ALL);
         String logFilePath = rootPath + File.separator + InserterConstants.LOG_FILENAME;
         this.fileHandler = new FileHandler(logFilePath);
@@ -156,7 +167,7 @@ public class CopyrightToolsEngine implements Runnable {
     }
 
     private String insertBlankSpace(String notice) {
-        if(this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
+        if (this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
             notice = InserterConstants.LINE_SEPARATOR + notice;
         } else {
             notice += InserterConstants.LINE_SEPARATOR;
@@ -167,13 +178,12 @@ public class CopyrightToolsEngine implements Runnable {
 
     private CommandType resolveCommandType(String consoleCommand) throws InvalidCommandException {
 
-        CommandType resultCommand = null;;
+        CommandType resultCommand = null;
+        ;
         switch (consoleCommand) {
         case ConsoleCommandConstants.INSERT:
             boolean bootomCondition = this.cli.hasOption(OptionConstants.BOOTOM_SHORT);
-            resultCommand = bootomCondition
-                    ? CommandType.INSERT_AFTER
-                    : CommandType.INSERT_BEFORE;
+            resultCommand = bootomCondition ? CommandType.INSERT_AFTER : CommandType.INSERT_BEFORE;
             break;
         case ConsoleCommandConstants.REMOVE:
             resultCommand = CommandType.REMOVE;
@@ -182,7 +192,7 @@ public class CopyrightToolsEngine implements Runnable {
             resultCommand = CommandType.REPLACE;
             break;
         default:
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("The comand cannot be resolved. Command: " + consoleCommand + " .");
         }
 
         return resultCommand;

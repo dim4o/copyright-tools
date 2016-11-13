@@ -21,11 +21,11 @@ import com.coprtools.util.FileManipulator;
 import com.coprtools.util.SourceManipulator;
 
 /**
- * A class that is responsible to create command object
+ * A class that is responsible to create {@AbstractCommand command} object
  */
 public class CommandFactory {
     /**
-     * Creates the desired AbstractCommand object by given command type and
+     * Creates the desired {@AbstractCommand object} by given command type and
      * specific set of parameters
      *
      * @param commandType
@@ -58,6 +58,7 @@ public class CommandFactory {
             command = new ReplaceCommand(notice, extension, manipulator, newNotice);
             break;
         default:
+            // TODO: Consider to remove this exception
             throw new InvalidCommandException();
         }
 

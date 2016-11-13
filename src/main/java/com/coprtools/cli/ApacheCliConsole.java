@@ -21,6 +21,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -79,29 +80,38 @@ public class ApacheCliConsole extends AbstractConsole {
                 .desc(UsageConstants.NEW_NOTICE_OPTION_DESC)
                 .hasArg().build());
 
-        // Insert on bottom of the source
+        // insert on bottom of the source
         options.addOption(Option.builder(OptionConstants.BOOTOM_SHORT)
                 .longOpt(OptionConstants.BOTTOM_LONG)
                 .optionalArg(false)
                 .desc(UsageConstants.BOTTOM_OPTION_DESCR).build());
 
-        // Enable job info logging option
+        // enable job info logging option
         options.addOption(Option.builder()
                 .longOpt(OptionConstants.INFO_LONG)
                 .optionalArg(true)
                 .desc(UsageConstants.INFO_OPTION_DESC).build());
 
-        // Add blank line before/after notice
+        // add blank line before/after notice
         options.addOption(Option.builder(OptionConstants.BLANK_SHORT)
                 .longOpt(OptionConstants.BLANK_LONG)
                 .optionalArg(true)
                 .desc(UsageConstants.BLANK_OPTION_DESC).build());
 
+        // specifies an output destination
         options.addOption(Option.builder(OptionConstants.OUTPUT_SHORT)
                 .longOpt(OptionConstants.OUTPUT_LONG)
                 .optionalArg(true)
-                .desc(UsageConstants.OUTPUT_OPTION_DESC)
-                .hasArg().build());
+                .desc(UsageConstants.OUTPUT_OPTION_DESC).build());
+
+        /*
+         * The notice argument will be parsed as a string (not as a file path).
+         * With this option you can remove/replace a string.
+         */
+        options.addOption(Option.builder(OptionConstants.STRING_SHORT)
+                .longOpt(OptionConstants.STRING_LONG)
+                .optionalArg(true)
+                .desc(UsageConstants.STRING_OPTION_DESC).build());
 
         return options;
     }

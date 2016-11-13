@@ -45,7 +45,7 @@ public class OptionConstants {
     // Info option
     public static final String INFO_LONG = "info";
 
-    // Notice option
+    // Notice options
     public static final String NOTICE_SHORT = "n";
 
     public static final String NOTICE_LONG = "notice";
@@ -53,6 +53,11 @@ public class OptionConstants {
     public static final String NEW_NOTICE_SHORT = "nn";
 
     public static final String NEW_NOTICE_LONG = "new-notice";
+
+    // String options
+    public static final String STRING_SHORT = "s";
+
+    public static final String STRING_LONG = "string";
 
     // Output option
     public static final String OUTPUT_SHORT = "o";
