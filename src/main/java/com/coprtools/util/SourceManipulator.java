@@ -30,20 +30,17 @@ import org.apache.commons.io.FileUtils;
 import com.coprtools.constants.InserterConstants;
 
 /**
- * <p>
- * Util class that manipulate with any kinds of source files.
- * </p>
+ * Utility class that can manipulate with any kinds of source files.
  *
  * @author dimcho.nedev
- *
  */
 public class SourceManipulator implements FileManipulator {
     /**
-     * Reads the source file.
+     * Reads the source from a file.
      *
      * @param file
-     *        - the given source file
-     * @return source file content
+     *            - the given source file
+     * @return String, the source file content
      */
     @Override
     public String readFromFile(File file) throws FileNotFoundException, IOException {
@@ -67,10 +64,11 @@ public class SourceManipulator implements FileManipulator {
      * Writes copyright notice on end of the given file.
      *
      * @param file
-     *        - the given source file
+     *            - the given source file
      * @param notice
-     *        - the copyright notice
+     *            - the copyright notice
      * @throws IOException
+     *             - thrown when failed to write a notice to file
      */
     @Override
     public void writeToFile(File file, String notice) throws IOException {
@@ -81,13 +79,19 @@ public class SourceManipulator implements FileManipulator {
     }
 
     /**
-     * Overrides the original source file content with new source (with copyright notice).
+     * Overrides the original source file content with a new source (with
+     * copyright notice).
+     * <p>
+     * Note: The original file will be deleted and a new one with the same source
+     * will be created.
+     * </p>
      *
      * @param file
-     *        - the original source file with the old source
+     *            - the original source file with the old source
      * @param newSource
-     *        - the new source with copyright notice
+     *            - the new source with copyright notice
      * @throws IOException
+     *             - thrown when failed to override a file
      */
     @Override
     public void overrideFile(File file, String newSource) throws IOException {
@@ -101,12 +105,12 @@ public class SourceManipulator implements FileManipulator {
     }
 
     /**
-     * Copy a folder and all its subfolders and files into another folder.
+     * Copy a folder with all subfolders and files into another folder.
      *
      * @param sourceFolder
-     *        - the source folder
+     *            - the source folder
      * @param destinationFolder
-     *        - the destination folder
+     *            - the destination folder
      * @throws IOException
      */
     @Override

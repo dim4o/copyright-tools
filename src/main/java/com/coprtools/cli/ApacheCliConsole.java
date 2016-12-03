@@ -21,7 +21,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -29,6 +28,12 @@ import com.coprtools.constants.OptionConstants;
 import com.coprtools.constants.UsageConstants;
 import com.coprtools.exceptions.ArgumentParseException;
 
+/**
+ * A concrete implementation of {@link AbstractConsole} class that uses
+ * org.apache.commmons.cli
+ *
+ * @author Dimcho Nedev
+ */
 public class ApacheCliConsole extends AbstractConsole {
 
     private Options options;
@@ -40,6 +45,12 @@ public class ApacheCliConsole extends AbstractConsole {
         this.options = initalizeOptions();
     }
 
+    /**
+     * Initializes the possible options for a command line.
+     *
+     * @return a collection of {@link org.apache.commons.cli.Option option}
+     *         objects
+     */
     private Options initalizeOptions() {
         Options options = new Options();
 
@@ -60,8 +71,7 @@ public class ApacheCliConsole extends AbstractConsole {
         // input folder location
         options.addOption(Option.builder(OptionConstants.ROOT_SHORT)
                 .longOpt(OptionConstants.ROOT_LONG)
-                .optionalArg(false)
-                .required()
+                .optionalArg(false).required()
                 .desc(UsageConstants.ROOT_OPTION_DESC)
                 .hasArg().build());
 
@@ -134,12 +144,7 @@ public class ApacheCliConsole extends AbstractConsole {
     @Override
     public void showUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp(
-                UsageConstants.USAGE,
-                UsageConstants.HEADER,
-                this.options,
-                UsageConstants.FOOTER,
-                false);
+        formatter.printHelp(UsageConstants.USAGE, UsageConstants.HEADER, this.options, UsageConstants.FOOTER, false);
     }
 
     @Override

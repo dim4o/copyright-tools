@@ -20,8 +20,12 @@ import com.coprtools.exceptions.InvalidCommandException;
 import com.coprtools.util.FileManipulator;
 import com.coprtools.util.SourceManipulator;
 
+import jdk.nashorn.internal.ir.ThrowNode;
+
 /**
  * A class that is responsible to create {@AbstractCommand command} object
+ *
+ * @author Dimcho
  */
 public class CommandFactory {
     /**
@@ -29,14 +33,14 @@ public class CommandFactory {
      * specific set of parameters
      *
      * @param commandType
-     *        - the type of the command
+     *            - the type of the command
      * @param args
-     *        - the command arguments
+     *            - the command arguments
      * @return the desired command object
      * @throws InvalidCommandException
+     *             - thrown when the command type cannot be resolved.
      */
-    public AbstractCommand create(CommandType commandType, Object... args)
-            throws InvalidCommandException{
+    public AbstractCommand create(CommandType commandType, Object... args) throws InvalidCommandException {
         AbstractCommand command = null;
 
         String notice = (String) args[0];

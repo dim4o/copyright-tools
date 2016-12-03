@@ -27,6 +27,8 @@ import com.coprtools.util.FileManipulator;
 
 /**
  * An abstract class that represents type for the base command
+ *
+ * @author Dimcho Nedev
  */
 public abstract class AbstractCommand {
 
@@ -40,26 +42,32 @@ public abstract class AbstractCommand {
 
     protected FileManipulator manipulator;
 
+    /**
+     * This is the base command functionality that will be overridden from each
+     * one command. Represents an atomic file manipulation: insert, remove or
+     * replace a notice.
+     *
+     * @param targetFile
+     *            - the file that will be manipulated
+     * @throws Exception
+     *             - thrown when the manipulation failed
+     */
     protected abstract void executeOnce(File targetFile) throws Exception;
 
-    AbstractCommand(
-            String notice,
-            String[] extensions,
-            FileManipulator manipulator){
+    AbstractCommand(String notice, String[] extensions, FileManipulator manipulator) {
         this.notice = notice;
         this.extensions = extensions;
         this.manipulator = manipulator;
     }
 
-
     /**
-     * Executes the current command recursively for all files
-     * in the specified target location directory
+     * Executes the current command recursively for all files in the specified
+     * target location directory
      *
      * @param targetLocation
-     *          - the target directory where the command will be executed
+     *            - the target directory where the command will be executed
      */
-    public void executeRecursively(File targetLocation){
+    public void executeRecursively(File targetLocation) {
         File[] files = targetLocation.listFiles();
 
         for (File file : files) {
@@ -86,14 +94,14 @@ public abstract class AbstractCommand {
         }
     }
 
-
     /**
-     * Checks whether an array of file extensions contains a specific file extension
+     * Checks whether an array of file extensions contains a specific file
+     * extension
      *
      * @param file
-     *          - the file which extension will be checked
+     *            - the file which extension will be checked
      * @param fileExtensions
-     *          - array of file extension
+     *            - array of file extension
      * @return
      */
     private boolean containsExtension(File file, String[] fileExtensions) {
