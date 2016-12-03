@@ -1,23 +1,21 @@
-{
-  "language": "java",
-  "jdk": "oraclejdk8",
-  "os": "linux",
-  "cache": {
-    "directories": [
-      "$HOME/.gradle"
-    ]
-  },
-  "before_script": [
-    "git fetch",
-    "git checkout fix-tests",
-  ],
-  "before_install": [
-    "chmod +x gradlew"
-  ],
-  "script": [
-    "chmod +x gradlew",
-    "./gradlew build --info"
-  ],
-  "group": "stable",
-  "dist": "precise"
-}
+language: java
+jdk: oraclejdk8
+os: linux
+
+notifications:
+  email:
+    recipients:
+        - dimcho.nedev+git@gmail.com
+
+cache:
+    directories:
+        - $HOME/.gradle
+
+before_install:
+    - chmod +x gradlew
+
+script:
+    - ./gradlew build
+
+
+    
