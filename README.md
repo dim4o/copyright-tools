@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dim4o/copyright-tools.svg?branch=master)](https://travis-ci.org/dim4o/copyright-tools)
 # copyright-tools
 This is a simple collection of tools for **inserting**, **removing** and **replacing** a copyright notice to any kinds of source code files.
 
