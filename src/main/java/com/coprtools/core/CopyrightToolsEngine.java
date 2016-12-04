@@ -179,7 +179,7 @@ public class CopyrightToolsEngine implements Runnable {
     private CommandType resolveCommandType(String consoleCommand) throws InvalidCommandException {
 
         CommandType resultCommand = null;
-        ;
+
         switch (consoleCommand) {
         case ConsoleCommandConstants.INSERT:
             boolean bootomCondition = this.cli.hasOption(OptionConstants.BOOTOM_SHORT);

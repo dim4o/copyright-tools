@@ -21,10 +21,8 @@ The commands require `root`, `notice` and `extensions` arguments.
 * **remove** - removes the first occurrence of the notice. Requires all mandatory arguments. This is an example usage with short options:  
 `remove -r "<pathToInputFolder>" -n "<pathToTheNotice>" -e <ListOfExtensions>`
 
-* **replace** - replace an old notice with a new one. Requires the mandatory argument and a `new-notice` argument. Example:  
-`replace -r "<pathToInputFolder>" -n "<pathToTheNotice>" --new-notice "<pathToTheNewNotice>" -e <ListOfExtensions>`
-
-
+* **replace** - replaces an old notice with a new one. Requires the mandatory argument and a `new-notice` argument. Example:  
+`replace -r "<pathToInputFolder>" -n "<pathToTheNotice>" --new-notice "<pathToTheNewNotice>" -e <ListOfExtensions>`. The command may be used to replace all occurrences of a specified string with another one. Just add a `-s`(`--string`) option somewhere.
 
 ### Options and arguments
 * `-h` or `--help` - prints help, no mandatory option with no arguments.
@@ -58,7 +56,9 @@ There are two ways:
 `remove --root "C:/targetDir" --notice "C:/NoticeToRemove.txt" -e .java`.
 
 * To replace an old copyright notice with a new one:  
-`repalce -r "C:/targetDir" -n "C:/old-notice.txt" -nn "C:/new-notice.txt" -e .java`
+`repalce -r "C:/targetDir" -n "C:/old-notice.txt" -nn "C:/new-notice.txt" -e .java`  
+To replace a string with a new one:  
+`replace -r "D:/MyProject" -n "old_string" -nn "new_string" -e .gradle -s`.
 
 * If you want to keep your original files untouched - simply run the above commands with `--output` (or `-o`) option and a path to desired output destination as an argument:  
 `insert -r "C:\\targetDir" -n "C:\\Notice.txt" -e .java .gradle -bl -o "C:\\output" -e .java`.
