@@ -25,7 +25,7 @@ import jdk.nashorn.internal.ir.ThrowNode;
 /**
  * A class that is responsible to create {@AbstractCommand command} object
  *
- * @author Dimcho
+ * @author Dimcho Nedev
  */
 public class CommandFactory {
     /**

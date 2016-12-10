@@ -16,6 +16,11 @@
 
 package com.coprtools.exceptions;
 
+/**
+ * The exception is thrown when the program fails to parse an argument.
+ *
+ * @author Dimcho Nedev
+ */
 public class ArgumentParseException extends Exception {
     private static final long serialVersionUID = 1575344553910273527L;
 

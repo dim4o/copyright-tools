@@ -20,6 +20,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Utility interface that describes manipulations over the source files.
+ *
+ * @author Dimcho Nedev
+ */
 public interface FileManipulator {
     String readFromFile(File file) throws FileNotFoundException, IOException;
 

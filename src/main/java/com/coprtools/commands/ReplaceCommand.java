@@ -23,7 +23,9 @@ import java.io.IOException;
 import com.coprtools.util.FileManipulator;
 
 /**
- * Replaces a copyright notice with another copyright notice
+ * Replaces a copyright notice with another copyright notice.
+ *
+ * @author Dimcho Nedev
  */
 public class ReplaceCommand extends AbstractCommand {
     private String newNotice;

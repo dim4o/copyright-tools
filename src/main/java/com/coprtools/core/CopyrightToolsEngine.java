@@ -39,6 +39,11 @@ import com.coprtools.exceptions.InvalidCommandException;
 import com.coprtools.util.FileManipulator;
 import com.coprtools.writer.Writer;
 
+/**
+ * This is a core class responsible for parsing and all commands execution.
+ *
+ * @author Dimcho Nedev
+ */
 public class CopyrightToolsEngine implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(CopyrightToolsEngine.class.getName());
 
@@ -52,6 +57,19 @@ public class CopyrightToolsEngine implements Runnable {
 
     private CommandFactory commandFactory;
 
+    /**
+     * Uses a dependency injection through the constructor.
+     *
+     * @param cli
+     *            - this is a CLI implementation
+     * @param manipulator
+     *            - this is {@link FileManipulator manipulator} implementation
+     * @param writer
+     *            - a {@link Writer} object implementation
+     * @param commandFactory
+     *            - a {@link CommandFactory factory} that helps for a command
+     *            creation
+     */
     public CopyrightToolsEngine(AbstractConsole cli, FileManipulator manipulator, Writer writer,
             CommandFactory commandFactory) {
         this.cli = cli;
@@ -60,6 +78,13 @@ public class CopyrightToolsEngine implements Runnable {
         this.commandFactory = commandFactory;
     }
 
+    /*
+     * TODO: The logic here smells like "spaghetti" code. Тоо much "if - else"
+     * statements witch make the code unclear. Consider to re-factor this
+     * method.
+     *
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
         LOGGER.setLevel(Level.SEVERE);
@@ -100,7 +125,7 @@ public class CopyrightToolsEngine implements Runnable {
                 }
 
                 String notice = null;
-                if (cli.hasOption("s")) {
+                if (cli.hasOption(OptionConstants.STRING_SHORT)) {
                     notice = cli.getOptionValue(OptionConstants.NOTICE_SHORT);
                     newNotice = cli.getOptionValue(OptionConstants.NEW_NOTICE_SHORT);
                 } else {
@@ -166,6 +191,14 @@ public class CopyrightToolsEngine implements Runnable {
         LOGGER.addHandler(fileHandler);
     }
 
+    /**
+     * Inserts a blank line after the notice(or before if a bottom option is
+     * specified).
+     *
+     * @param notice
+     *            - the notice
+     * @return a notice with a blank line after(or before)
+     */
     private String insertBlankSpace(String notice) {
         if (this.cli.hasOption(OptionConstants.BOOTOM_SHORT)) {
             notice = InserterConstants.LINE_SEPARATOR + notice;

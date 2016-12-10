@@ -25,6 +25,11 @@ import com.coprtools.util.SourceManipulator;
 import com.coprtools.writer.ConsoleWriter;
 import com.coprtools.writer.Writer;
 
+/**
+ * This is the main entry point for the copyright-tools application.
+ *
+ * @author Dimcho Nedev
+ */
 public class CopyrightToolsMain {
     public static void main(String[] args) {
         AbstractConsole cli = new ApacheCliConsole(args);

@@ -32,7 +32,7 @@ import com.coprtools.constants.InserterConstants;
 /**
  * Utility class that can manipulate with any kinds of source files.
  *
- * @author dimcho.nedev
+ * @author Dimcho Nedev
  */
 public class SourceManipulator implements FileManipulator {
     /**

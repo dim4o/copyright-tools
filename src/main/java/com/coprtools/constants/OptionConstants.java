@@ -16,6 +16,11 @@
 
 package com.coprtools.constants;
 
+/**
+ * Contains all short and long options as constants.
+ *
+ * @author Dimcho Nedev
+ */
 public class OptionConstants {
     // Blank option
     public static final String BLANK_SHORT = "bl";

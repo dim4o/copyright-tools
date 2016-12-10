@@ -17,7 +17,9 @@
 package com.coprtools.constants;
 
 /**
- * Contains constants that describe the program's usage
+ * Contains constants that describe the program's usage.
+ *
+ * @author Dimcho Nedev
  */
 public class UsageConstants {
 	public static final String BOTTOM_OPTION_DESCR = "Insert on bottom";

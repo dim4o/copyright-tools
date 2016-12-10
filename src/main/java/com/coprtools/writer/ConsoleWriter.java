@@ -16,7 +16,13 @@
 
 package com.coprtools.writer;
 
-public class ConsoleWriter implements Writer{
+/**
+ * A console implementation of the {@link com.coprtools.writer.Writer}
+ * interface.
+ *
+ * @author Dimcho Nedev
+ */
+public class ConsoleWriter implements Writer {
 
     @Override
     public void writeLine(String line) {

@@ -16,6 +16,11 @@
 
 package com.coprtools.writer;
 
+/**
+ * This is an abstraction for the base writing functionality.
+ *
+ * @author Dimcho Nedev
+ */
 public interface Writer {
     public void writeLine(String line);
 

@@ -16,6 +16,11 @@
 
 package com.coprtools.exceptions;
 
+/**
+ * The exception is thrown when try to insert a notice that is already inserted.
+ *
+ * @author Dimcho Nedev
+ */
 public class AlreadyInsertedException extends Exception {
     private static final long serialVersionUID = 3214328549254991000L;
 

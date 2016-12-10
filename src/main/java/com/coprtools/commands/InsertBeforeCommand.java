@@ -24,7 +24,9 @@ import com.coprtools.exceptions.AlreadyInsertedException;
 import com.coprtools.util.FileManipulator;
 
 /**
- * Inserts a copyright notice before the source code(file content)
+ * Inserts a copyright notice before the source code(file content).
+ *
+ * @author Dimcho Nedev
  */
 public class InsertBeforeCommand extends AbstractCommand {
 

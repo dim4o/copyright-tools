@@ -22,7 +22,9 @@ import java.io.IOException;
 import com.coprtools.util.FileManipulator;
 
 /**
- * Inserts a copyright notice after the source code (file content)
+ * Inserts a copyright notice after the source code (file content).
+ *
+ * @author Dimcho Nedev
  */
 public class InsertAfterCommand extends AbstractCommand {
 

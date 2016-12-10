@@ -38,6 +38,12 @@ import com.coprtools.util.FileManipulator;
 import com.coprtools.util.SourceManipulator;
 import com.coprtools.writer.ConsoleWriter;
 
+/**
+ * A base class for the all unit tests. Initializes the test files
+ * and removes the temporary files after every test.
+ *
+ * @author Dimcho Nedev
+ */
 public class BaseCommandTest {
 
     protected static final String NOT_INSERTED =
