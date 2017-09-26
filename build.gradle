@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-version = '0.0.1'
+version = '0.1'
 
 mainClassName = 'com.coprtools.main.CopyrightToolsMain'
 
@@ -22,7 +22,7 @@ jar {
 }
 
 repositories {
-mavenLocal()
+    mavenLocal()
     mavenCentral()
 }
 
@@ -45,6 +45,16 @@ run {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 //tasks.withType(Test) {
