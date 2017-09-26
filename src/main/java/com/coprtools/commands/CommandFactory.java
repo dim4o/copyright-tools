@@ -20,16 +20,14 @@ import com.coprtools.exceptions.InvalidCommandException;
 import com.coprtools.util.FileManipulator;
 import com.coprtools.util.SourceManipulator;
 
-import jdk.nashorn.internal.ir.ThrowNode;
-
 /**
- * A class that is responsible to create {@AbstractCommand command} object
+ * A class that is responsible to create {@link AbstractCommand command} object
  *
  * @author Dimcho Nedev
  */
 public class CommandFactory {
     /**
-     * Creates the desired {@AbstractCommand object} by given command type and
+     * Creates the desired {@link AbstractCommand object} by given command type and
      * specific set of parameters
      *
      * @param commandType

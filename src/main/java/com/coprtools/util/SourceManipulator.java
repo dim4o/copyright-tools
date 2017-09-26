@@ -112,6 +112,7 @@ public class SourceManipulator implements FileManipulator {
      * @param destinationFolder
      *            - the destination folder
      * @throws IOException
+     *            - when an I/O exception of some sort has occurred
      */
     @Override
     public void copyFolder(File sourceFolder, File destinationFolder) throws IOException {
