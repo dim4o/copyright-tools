@@ -16,6 +16,8 @@
 
 package com.coprtools.main;
 
+import java.util.Arrays;
+
 import com.coprtools.cli.AbstractConsole;
 import com.coprtools.cli.ApacheCliConsole;
 import com.coprtools.commands.CommandFactory;
@@ -33,11 +35,18 @@ import com.coprtools.writer.Writer;
 public class CopyrightToolsMain {
     public static void main(String[] args) {
         AbstractConsole cli = new ApacheCliConsole(args);
-        FileManipulator manipulator = new SourceManipulator();
-        Writer writer = new ConsoleWriter();
-        CommandFactory commandFactrory = new CommandFactory();
-        CopyrightToolsEngine engine = new CopyrightToolsEngine(cli, manipulator, writer, commandFactrory);
+        // checks for "help" option before to parse argument to avoid MissingArgumentException
+        // (because some other options are required)
+        // TODO: This solution can be useful: https://stackoverflow.com/a/14357255/2595579
+        if(Arrays.asList(args).contains("-h") || Arrays.asList(args).contains("--help")) {
+            cli.showUsage();
+        } else {
+            FileManipulator manipulator = new SourceManipulator();
+            Writer writer = new ConsoleWriter();
+            CommandFactory commandFactrory = new CommandFactory();
+            CopyrightToolsEngine engine = new CopyrightToolsEngine(cli, manipulator, writer, commandFactrory);
 
-        engine.run();
+            engine.run();
+        }
     }
 }

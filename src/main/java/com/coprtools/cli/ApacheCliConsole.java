@@ -71,7 +71,8 @@ public class ApacheCliConsole extends AbstractConsole {
         // input folder location
         options.addOption(Option.builder(OptionConstants.ROOT_SHORT)
                 .longOpt(OptionConstants.ROOT_LONG)
-                .optionalArg(false).required()
+                .optionalArg(false)
+                .required()
                 .desc(UsageConstants.ROOT_OPTION_DESC)
                 .hasArg().build());
 
