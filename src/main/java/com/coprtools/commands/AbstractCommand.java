@@ -82,7 +82,7 @@ public abstract class AbstractCommand {
                     this.hasError = true;
                     LOGGER.log(Level.SEVERE, String.format("%s - ERROR - %s", file.getName(), e.getMessage()));
                 } catch (AlreadyInsertedException e) {
-                    this.hasError = true;
+                    //this.hasError = true;
                     LOGGER.log(Level.INFO, String.format("%s - ALREADY INSERTED (nothong to do here) - %s",
                             file.getName(), e.getMessage()));
                 } catch (Exception e) {
