@@ -1,6 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
 
+group = 'com.coprtools'
 version = '0.2'
 
 mainClassName = 'com.coprtools.main.CopyrightToolsMain'
@@ -10,10 +13,11 @@ targetCompatibility = 1.8
 
 jar {
 	from {
-        (configurations.runtime).collect {
-            it.isDirectory() ? it : zipTree(it)
+        configurations.runtime.filter( {! (it.name =~ /gradle-api.*\.jar/ || it.name =~ /groovy.*\.jar/)}).collect {
+             it.isDirectory() ? it : zipTree(it)
         }
     }
+
     manifest {
         attributes 'Implementation-Title': 'Copyright Tools',
                    'Implementation-Version': version,
@@ -27,8 +31,10 @@ repositories {
 }
 
 dependencies {
+    compile gradleApi()
+
     compile 'commons-cli:commons-cli:1.4'
-	compile 'commons-io:commons-io:2.5'
+    compile 'commons-io:commons-io:2.5'
     testCompile 'junit:junit:4.12'
 }
 
@@ -41,6 +47,41 @@ run {
     //    args Eval.me(appArgs)
     //}
     standardInput = System.in
+}
+
+publishing {
+    publications {
+        coprTools(MavenPublication) {
+            groupId 'com.coprtools'
+            artifactId 'copyright-tools'
+            version version
+
+            from components.java
+
+            // Credit: http://stackoverflow.com/a/32353697/3370842
+            pom.withXml {
+                // Generate map of resolved versions
+                Map resolvedVersionMap = [:]
+                Set<ResolvedArtifact> resolvedArtifacts = configurations.compile.getResolvedConfiguration().getResolvedArtifacts()
+                resolvedArtifacts.addAll(configurations.testCompile.getResolvedConfiguration().getResolvedArtifacts())
+                resolvedArtifacts.each {
+                    ModuleVersionIdentifier mvi = it.getModuleVersion().getId();
+                    resolvedVersionMap.put("${mvi.getGroup()}:${mvi.getName()}", mvi.getVersion())
+                }
+
+                // Update dependencies with resolved versions
+                asNode().dependencies.first().each {
+                    def groupId = it.get("groupId").first().value().first()
+                    def artifactId = it.get("artifactId").first().value().first()
+                    it.get("version").first().value = resolvedVersionMap.get("${groupId}:${artifactId}")
+                }
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
 }
 
 task wrapper(type: Wrapper) {
