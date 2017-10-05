@@ -2,7 +2,9 @@ package com.coprtools.plugin;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
@@ -10,22 +12,24 @@ import org.gradle.api.tasks.TaskAction;
 import com.coprtools.exceptions.InvalidCommandException;
 import com.coprtools.main.CopyrightToolsMain;
 
-public class CoprtTask extends DefaultTask {
+public class CopyrihtTask extends DefaultTask {
+    private static final String COMMAND = "%s -r %s -n %s ";
     @TaskAction
     public void greet() throws FileNotFoundException, IOException, InvalidCommandException {
-        CoprtPluginExtension extension = getProject().getExtensions().findByType(CoprtPluginExtension.class);
-        if (extension == null) {
-            extension = new CoprtPluginExtension();
+        CopyrightPluginExtension coprExtension = getProject().getExtensions()
+                .findByType(CopyrightPluginExtension.class);
+        if (coprExtension == null) {
+            coprExtension = new CopyrightPluginExtension();
         }
 
-        String rootDir = extension.getRootDir();
-        String noticePath = extension.getNoticePath();
-        String extensions = String.join(" ", extension.getExtensions());
-        String action = extension.getAction();
-        
-        // TODO: add logic for blank line insertion or borrow a method from the Engine(in some way)
-        String blankLine = extension.isBlankLine() ? "-bl" : "";
-        
+        // argument initialization
+        String rootDir = coprExtension.getRootDir();
+        String noticePath = coprExtension.getNoticePath();
+        String extensions = String.join(" ", coprExtension.getExtensions());
+        String action = coprExtension.getAction();
+        String blankLine = coprExtension.isBlankLine() ? "-bl" : "";
+        String newNotice = coprExtension.getNewNoticePath() != null ? "-nn" + coprExtension.getNewNoticePath() : "";
+
         String argsuments = action + " -r " + rootDir + " -n " + noticePath + " -e " + extensions + " " + blankLine + " --info";
         String[] args = argsuments.split(" ");
         
@@ -37,7 +41,7 @@ public class CoprtTask extends DefaultTask {
         am.parse(args);*/
         
         CopyrightToolsMain.main(args);
-        
+
         /*AbstractConsole cli = new ApacheCliConsole(args);
         // checks for "help" option before to parse argument to avoid MissingArgumentException
         // (because some other options are required)

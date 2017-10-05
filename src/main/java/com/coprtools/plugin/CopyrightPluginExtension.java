@@ -1,7 +1,7 @@
 package com.coprtools.plugin;
 
 //TODO: Follow this convention: `path` for file, `dir` for folder location
-public class CoprtPluginExtension {
+public class CopyrightPluginExtension {
     private String message = "Default Greeting from Gradle";
     
     private String rootDir = ".";
