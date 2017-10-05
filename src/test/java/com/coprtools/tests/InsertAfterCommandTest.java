@@ -47,7 +47,7 @@ public class InsertAfterCommandTest extends BaseCommandTest {
 
     @Test
     public void testInsertAfter_withNoticeWithOneBlankLineTest() throws FileNotFoundException, IOException{
-        String command = "insert -b -r ./temp/rootDir -n ./temp/notice.txt -e .cs -bl 1";
+        String command = "insert -b -r ./temp/rootDir -n ./temp/notice.txt -e .cs -bl";
         this.executeCommand(command);
         String noticeWithBlankLineAfter = System.getProperty("line.separator") + NOTICE;
 
