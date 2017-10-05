@@ -79,7 +79,7 @@ public class CopyrightToolsEngine implements Runnable {
     }
 
     /*
-     * TODO: The logic here smells like "spaghetti" code. Тоо much "if - else"
+     * TODO: The logic here smells like "spaghetti" code. Too much "if - else"
      * statements witch make the code unclear. Consider to re-factor this
      * method.
      *
